@@ -1,26 +1,6 @@
 
 let resultadoNumTareas = [];
 
-const $formularioInicio = document.querySelector("#formularioInicio");
-    
-for(let i = 0; i < 8; i++){
-    
-    const $divCampoTareas = document.createElement("div");
-    const $labelCampoTareas = document.createElement("label");
-    const $inputCampoTareas = document.createElement("input");
-    document.querySelector("#camposTareas").appendChild($divCampoTareas);
-    $divCampoTareas.appendChild($labelCampoTareas);
-    $divCampoTareas.appendChild($inputCampoTareas);
-    $labelCampoTareas.textContent=`Ingrese el nombre de la tarea ${i+1}:`; 
-    $inputCampoTareas.name=`input${i}`;
-    $inputCampoTareas.type="text";
-    $inputCampoTareas.id=`inputId${i}`;
-
-    
-
-}
-
-
 class Inspectores{
     
     constructor(nombre,tareas){
@@ -28,9 +8,7 @@ class Inspectores{
         this.tareas = tareas;
 
     }
-    saluda(){
-        document.write(`Hola soy ${this.nombre} el encargado de supevisar: ${this.tareas}`)
-    }
+    
 
 }
 
@@ -40,6 +18,84 @@ class Integrantes extends Inspectores{
 
     }
 }
+let $cantidadTareas;
+let confirmaQueIngresaronTareas;
+let $botonCantTareas = document.querySelector("#next");
+$botonCantTareas.onclick = function(){
+    $cantidadTareas=document.querySelector('[name=numTareas]').value;
+   
+    if($cantidadTareas===""){
+        confirmaQueIngresaronTareas=false;
+    }else{
+        confirmaQueIngresaronTareas=true;
+        creaCamposNombresTareas($cantidadTareas);
+    }
+
+    
+}
+
+let $botonNumIntegrantes = document.querySelector('#enviarIntegrantes');
+let numIntegrantes;
+let confirmaIngresoDeIntegrantes;
+$botonNumIntegrantes.onclick = function(){
+    numIntegrantes = document.querySelector('[name=numIntegrantes]').value;
+    if(numIntegrantes===""){
+        confirmaIngresoDeIntegrantes=false;
+    }else{
+        confirmaIngresoDeIntegrantes=true;
+        creaCamposNombresIntegrantes(numIntegrantes);
+    }
+
+}
+
+let confirmaIngresoTarea;
+let tareaEspecifica;
+const $botonTareaEspecifica = document.querySelector('#enviaTarea');
+$botonTareaEspecifica.onclick = function(){
+    tareaEspecifica = document.querySelector('[name=infoTareaEspecifica]').value;
+    if(tareaEspecifica===""){
+        confirmaIngresoTarea=false;
+    }else{
+        confirmaIngresoTarea=true;
+
+    }
+}
+
+let confirmaIntegranteEspecifico;
+let nombreIntegrante;
+const $botonIntegranteEspecifico = document.querySelector('#enviaInfoIntegrante');
+$botonIntegranteEspecifico.onclick = function(){
+    nombreIntegrante = document.querySelector('[name = infoIntegranteEspecifico]').value;
+    if(nombreIntegrante===""){
+        confirmaIntegranteEspecifico=false;
+    }else{
+        confirmaIntegranteEspecifico=true;
+
+    }
+}
+
+
+function numTareas(cantidadTareas){
+    let tareasCreadas = [];
+ 
+    
+        for(let i = 0; i < cantidadTareas; i++){
+            
+            let valorInput=document.querySelector(`#inputId${i}`).value;
+            tareasCreadas[i] = valorInput;
+        }
+    
+    if(tareasCreadas.length>0){
+        return tareasCreadas;
+    }else{
+        return false;
+    }
+    
+
+
+
+    
+}
 
 let generaCantTareasPorIntegrante = () =>{
     
@@ -48,7 +104,12 @@ let generaCantTareasPorIntegrante = () =>{
     let numAleatorio = Math.round(Math.random()*(randomTareas -1));
     let tareaAzar;
     if(numAleatorio===0){
-        document.write(`<p> El integrante tuvo suerte y no debe hacer ninguna tarea. </p>`)
+        let parrafoInfoExtra = document.createElement('p');
+        let divExtra = document.createElement("div");
+        divExtra.className="infoExtra";
+        document.querySelector(".mostrarInfo1").appendChild(divExtra);
+        divExtra.appendChild(parrafoInfoExtra);
+        parrafoInfoExtra.textContent = `El integrante estuvo de suerte y no debe hacer ninguna tarea esta semana`;
     }
     for(let i = 0; i<numAleatorio; i++){
         tareaAzar = resultadoNumTareas[Math.round(Math.random()*(randomTareas-1))];
@@ -70,8 +131,8 @@ const crearIntegrantes = (cantidad)=>{
     let todosLosIntegrantes = [];
     let miembroFamilia;
     for(let i=0; i<cantidad; i++){
+        miembroFamilia = document.querySelector(`#inputIntegrante${i}`).value;
         
-        miembroFamilia = prompt("Ingrese nombre del miembro de la familia");
         let integrante = new Integrantes(miembroFamilia,generaCantTareasPorIntegrante());
         todosLosIntegrantes.push(integrante);
         console.log(integrante);
@@ -86,7 +147,7 @@ const crearIntegrantes = (cantidad)=>{
 function creaInspectores(){
     
         
-        resultadoNumTareas=numTareas();
+        resultadoNumTareas=numTareas($cantidadTareas);
         if(resultadoNumTareas!=false&&resultadoNumTareas!=undefined){
         let todosLosInspectores = [];
         let nombres = ["Pedro","Camilo","Sara","Ambar","Neithan","Ruby","Jose","Juan"];
@@ -121,27 +182,6 @@ function creaInspectores(){
 }
 
 
-function numTareas(cantidadTareas = 8){
-    let tareasCreadas = [];
- 
-    
-        for(let i = 0; i < cantidadTareas; i++){
-            
-            let valorInput=document.querySelector(`#inputId${i}`).value;
-            tareasCreadas[i] = valorInput;
-        }
-    
-    if(tareasCreadas.length>0){
-        return tareasCreadas;
-    }else{
-        return false;
-    }
-    
-
-
-
-    
-}
 
 
     
@@ -222,24 +262,38 @@ const infoDeIntegranteEspecifico = (integrante,ArrayTodosLosIntegrantes,ArrayTod
 let getTodosLosInspectores; 
 let getTodosLosIntegrantes; 
 
-const botonEnviaTareas = document.querySelector("#enviarTareas");
+const botonEnviaTareas = document.querySelector("#ejecutarFunciones");
 
-botonEnviaTareas.onclick=function(){
-    getTodosLosInspectores = creaInspectores();
-    getTodosLosIntegrantes = crearIntegrantes(7);
+    botonEnviaTareas.onclick=function(){
 
-    if(getTodosLosInspectores!=false && getTodosLosIntegrantes!=false){
-        let resultadoInfoTareaEspecifica = infoTareaEspecifica(prompt("Ingrese la tarea de la cual desea obtener info"),getTodosLosIntegrantes,getTodosLosInspectores);
-        let resultadoInfoIntegranteEspecific = infoDeIntegranteEspecifico(prompt("Ingrese el nombre del integrante del cual desea saber sus tareas"),getTodosLosIntegrantes,getTodosLosInspectores);
-        const infoTotal = `${resultadoInfoTareaEspecifica} ${resultadoInfoIntegranteEspecific}`;
-        
-        
-        
-        const $textoInfoTarea = document.createElement("p");
-        document.querySelector("#camposTareas").appendChild($textoInfoTarea);
-        $textoInfoTarea.className='parrafo';
-        document.querySelector('.parrafo').textContent= infoTotal;
-
+        if(confirmaQueIngresaronTareas===true && confirmaIngresoDeIntegrantes===true){
+            
+            getTodosLosInspectores = creaInspectores();
+            getTodosLosIntegrantes = crearIntegrantes(numIntegrantes);
+    
+            if(getTodosLosInspectores!=false && getTodosLosIntegrantes!=false&&confirmaIngresoTarea===true&&confirmaIntegranteEspecifico===true){
+                
+                
+                
+                let resultadoInfoTareaEspecifica = infoTareaEspecifica(tareaEspecifica,getTodosLosIntegrantes,getTodosLosInspectores);
+                let resultadoInfoIntegranteEspecific = infoDeIntegranteEspecifico(nombreIntegrante,getTodosLosIntegrantes,getTodosLosInspectores);
+                const infoTotal = `${resultadoInfoTareaEspecifica} ${resultadoInfoIntegranteEspecific}`;
+            
+            
+            
+                const $textoInfoTarea = document.createElement("p");
+                const $camposTareas = document.querySelector(".mostrarInfo1");
+                $camposTareas.appendChild($textoInfoTarea);
+                $textoInfoTarea.className='parrafo';
+                document.querySelector('.parrafo').textContent= infoTotal;
+    
+            }
+        }else{
+            alert("Primero debes agregar las tareas.")
+        }
+       
     }
-   
-}
+
+
+
+
