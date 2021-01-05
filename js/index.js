@@ -48,6 +48,32 @@ $botonNumIntegrantes.onclick = function(){
 
 }
 
+let confirmaIngresoTarea;
+let tareaEspecifica;
+const $botonTareaEspecifica = document.querySelector('#enviaTarea');
+$botonTareaEspecifica.onclick = function(){
+    tareaEspecifica = document.querySelector('[name=infoTareaEspecifica]').value;
+    if(tareaEspecifica===""){
+        confirmaIngresoTarea=false;
+    }else{
+        confirmaIngresoTarea=true;
+
+    }
+}
+
+let confirmaIntegranteEspecifico;
+let nombreIntegrante;
+const $botonIntegranteEspecifico = document.querySelector('#enviaInfoIntegrante');
+$botonIntegranteEspecifico.onclick = function(){
+    nombreIntegrante = document.querySelector('[name = infoIntegranteEspecifico]').value;
+    if(nombreIntegrante===""){
+        confirmaIntegranteEspecifico=false;
+    }else{
+        confirmaIntegranteEspecifico=true;
+
+    }
+}
+
 
 function numTareas(cantidadTareas){
     let tareasCreadas = [];
@@ -70,16 +96,6 @@ function numTareas(cantidadTareas){
 
     
 }
-
-
-
-
-
-
-
-
-
-
 
 let generaCantTareasPorIntegrante = () =>{
     
@@ -255,9 +271,12 @@ const botonEnviaTareas = document.querySelector("#ejecutarFunciones");
             getTodosLosInspectores = creaInspectores();
             getTodosLosIntegrantes = crearIntegrantes(numIntegrantes);
     
-            if(getTodosLosInspectores!=false && getTodosLosIntegrantes!=false){
-                let resultadoInfoTareaEspecifica = infoTareaEspecifica(prompt("Ingrese la tarea de la cual desea obtener info"),getTodosLosIntegrantes,getTodosLosInspectores);
-                let resultadoInfoIntegranteEspecific = infoDeIntegranteEspecifico(prompt("Ingrese el nombre del integrante del cual desea saber sus tareas"),getTodosLosIntegrantes,getTodosLosInspectores);
+            if(getTodosLosInspectores!=false && getTodosLosIntegrantes!=false&&confirmaIngresoTarea===true&&confirmaIntegranteEspecifico===true){
+                
+                
+                
+                let resultadoInfoTareaEspecifica = infoTareaEspecifica(tareaEspecifica,getTodosLosIntegrantes,getTodosLosInspectores);
+                let resultadoInfoIntegranteEspecific = infoDeIntegranteEspecifico(nombreIntegrante,getTodosLosIntegrantes,getTodosLosInspectores);
                 const infoTotal = `${resultadoInfoTareaEspecifica} ${resultadoInfoIntegranteEspecific}`;
             
             
