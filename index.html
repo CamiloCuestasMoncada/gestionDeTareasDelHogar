@@ -6,55 +6,67 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Tareas del hogar</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
+    <!--<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">-->
     <!--<link rel='stylesheet' type='text/css' media='screen' href='main.css'>--> 
     <!--<script src='main.js'></script>--> 
 </head>
 <body>
-    <header>
-        <div></div>
+    <header class="container">
+        <div>
+            <h1 >Gestiona las tareas de tu hogar</h1>
+        </div>
         <nav></nav>
     </header>
-    <h1>Gestiona las tareas de tu hogar</h1>
-    <section id="ingresoDeTareas">
+    
+    <section id="ingresoDeTareas" class="container">
         <span>¡Empecemos por ingresar la cantidad de tareas para realizar en la semana!</span>
         <form id="formularioInicio">
             <label>Ingrese la cantidad de tareas:</label>
             <input name="numTareas" type="number">
-            <button type="button" id="next">Continuar</button>
+            <button type="button" id="next" class="btn btn-primary btn-lg">Continuar</button>
             <div id="camposTareas"></div>
             
             
         </form>
     </section>
     
-    <section id="integrantes">
+    <section id="integrantes" class="container">
         <span>¡Ahora vamos a ingresar la cantidad de integrantes de tu familia!</span>
         <form>
             <label>Ingrese la cantidad de integrantes:</label>
             <input type="number" name="numIntegrantes">
             <div id="camposIntegrantes"></div>
-            <button id="enviarIntegrantes" type="button">Continuar</button>
+            <button id="enviarIntegrantes" type="button" class="btn btn-primary btn-lg">Continuar</button>
         </form>
         
     </section>
-    <section>
+    <section class="container">
         <form>
             <label>Ingrese la tarea de la cual desea obtener más información:</label>
             <input type="text" name="infoTareaEspecifica"> 
-            <button id="enviaTarea" type="button">Confirmar</button>
+            <button id="enviaTarea" type="button" class="btn btn-primary btn-lg">Confirmar</button>
         </form>
         <form>
             <label>Ingrese el integrante del cual desea obtener más información:</label>
             <input type="text" name="infoIntegranteEspecifico"> 
-            <button id="enviaInfoIntegrante" type="button">Confirmar</button>
+            <button id="enviaInfoIntegrante" type="button" class="btn btn-primary btn-lg">Confirmar</button>
         </form>
     </section>
-    <section id="info1">
+    <section id="info1" class="container">
         <div class="mostrarInfo1"></div>
     </section>
-    <button id="ejecutarFunciones" type="button">Enviar</button>
+    <div class="container">
+        <button id="ejecutarFunciones" type="button" class="btn btn-primary btn-lg">Enviar</button>
+    </div>
+   
+    <section class="container">
+        <img src="./img/clean.png" alt="articulos de limpieza">
+    </section>
 </body>
 <script src="js/dom.js"></script>
 <script src="js/index.js"></script>
