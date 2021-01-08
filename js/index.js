@@ -20,7 +20,7 @@ class Integrantes extends Inspectores{
 }
 let $cantidadTareas;
 let confirmaQueIngresaronTareas;
-let $botonCantTareas = document.querySelector("#next");
+let $botonCantTareas = document.querySelector("#botonEnviarTareas");
 $botonCantTareas.onclick = function(){
     $cantidadTareas=document.querySelector('[name=numTareas]').value;
    
@@ -29,6 +29,8 @@ $botonCantTareas.onclick = function(){
     }else{
         confirmaQueIngresaronTareas=true;
         creaCamposNombresTareas($cantidadTareas);
+        //mostrarFormIntegrantes();
+        
     }
 
     
@@ -44,6 +46,8 @@ $botonNumIntegrantes.onclick = function(){
     }else{
         confirmaIngresoDeIntegrantes=true;
         creaCamposNombresIntegrantes(numIntegrantes);
+        mostrarFormIntegranteyTareaEspecifica();
+        //ocultaEtiqueta('#botonEnviarTareas','ocultaBtnEnviarTareas');
     }
 
 }
@@ -74,6 +78,37 @@ $botonIntegranteEspecifico.onclick = function(){
     }
 }
 
+function muestraEtiquetaOculta(identificadorActual,identificadorNuevo){
+    document.querySelector(identificadorActual).id=identificadorNuevo;
+}
+
+function ocultaEtiqueta(identificadorActual,identificadorNuevo){
+    document.querySelector(identificadorActual).id=identificadorNuevo;
+}
+
+function mostrarFormIntegrantes(){
+    document.querySelector('#ocultaIntegrantes').id="muestraIntegrantes";
+}
+
+function ocultarFormIntegrantes(){
+    document.querySelector("#muestraIntegrantes").id="ocultaIntegrantes";
+}
+
+function mostrarFormIntegranteyTareaEspecifica(){
+    document.querySelector('#ocultaInfoTarea').id="muestraInfoTarea";
+}
+
+function ocultarFormIntegranteyTareaEspecifica(){
+    document.querySelector('#muestraInfoTarea').id="ocultaInfoTarea";
+}
+
+function muestraResultadoInfo(){
+    document.querySelector('#ocultaResultadoInfo').id="muestraResultadoInfo";
+}
+
+function ocultaResultadoInfo(){
+    document.querySelector('#muestraResultadoInfo').id="ocultaResultadoInfo";
+}
 
 function numTareas(cantidadTareas){
     let tareasCreadas = [];
@@ -107,7 +142,7 @@ let generaCantTareasPorIntegrante = () =>{
         let parrafoInfoExtra = document.createElement('p');
         let divExtra = document.createElement("div");
         divExtra.className="infoExtra";
-        document.querySelector(".mostrarInfo1").appendChild(divExtra);
+        document.querySelector("#mostrarInfo1").appendChild(divExtra);
         divExtra.appendChild(parrafoInfoExtra);
         parrafoInfoExtra.textContent = `El integrante estuvo de suerte y no debe hacer ninguna tarea esta semana`;
     }
@@ -265,7 +300,9 @@ let getTodosLosIntegrantes;
 const botonEnviaTareas = document.querySelector("#ejecutarFunciones");
 
     botonEnviaTareas.onclick=function(){
-
+        
+        
+        
         if(confirmaQueIngresaronTareas===true && confirmaIngresoDeIntegrantes===true){
             
             getTodosLosInspectores = creaInspectores();
@@ -282,10 +319,28 @@ const botonEnviaTareas = document.querySelector("#ejecutarFunciones");
             
             
                 const $textoInfoTarea = document.createElement("p");
-                const $camposTareas = document.querySelector(".mostrarInfo1");
+                const $camposTareas = document.querySelector("#mostrarInfo1");
                 $camposTareas.appendChild($textoInfoTarea);
                 $textoInfoTarea.className='parrafo';
                 document.querySelector('.parrafo').textContent= infoTotal;
+                
+                /*if(document.querySelector('#muestraIntegrantes')){
+                    //ocultarFormIntegrantes();
+                    
+                    
+                    ocultaEtiqueta('#muestraIntegrantes',"ocultaIntegrantes");
+                    
+                }*/
+
+                if(document.querySelector('#ocultaResultadoInfo')){
+                    muestraResultadoInfo();
+                }
+
+                const $botonResultados = document.querySelector("#ejecutarFunciones");
+                $botonResultados.style.display='none';
+                
+
+                
     
             }
         }else{

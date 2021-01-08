@@ -1,0 +1,30 @@
+#ocultaInfoTarea{
+    display: none;
+}
+
+#ocultaResultadoInfo{
+    display: none;
+}
+
+/*#ocultaIntegrantes{
+    display: none;
+}
+*/
+#ocultaBtnEnviarTareas{
+    display: none;
+}
+
+#titulo{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size:400%;    
+}
+#social-media{
+    background-color:rgb(229, 218, 118);
+}
+#infoPersonal{
+    background-color:rgb(25, 25, 25);
+}
+
+#autor{
+    color: rgb(250, 250, 250);
+}
