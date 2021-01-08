@@ -15,8 +15,32 @@ const creaCamposNombresTareas = numTareas =>{
         $inputCampoTareas.name=`input${i}`;
         $inputCampoTareas.type="text";
         $inputCampoTareas.id=`inputId${i}`;
+        $divCampoTareas.id=`filaInput${i}`;
 
     }
+    gsap.to('#filaInput0',{
+        duration:4,
+        y:7,
+        ease: 'elastic',
+        
+        
+    });
+    
+    gsap.to('#filaInput1',{
+        duration:6,
+        y:7,
+        ease: 'elastic',
+        
+        
+    });
+    
+    gsap.to('#filaInput2',{
+        duration:8,
+        y:7,
+        ease: 'elastic',
+        
+        
+    });
 
 }
 
