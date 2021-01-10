@@ -8,75 +8,104 @@
     <title>Tareas del hogar</title>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link href="css/style.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="main.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <!--<link rel='stylesheet' type='text/css' media='screen' href='main.css'>--> 
-    <!--<script src='main.js'></script>--> 
+    <!---<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">-->
+    <!---<link rel='stylesheet' type='text/css' media='screen' href='main.css'>--> 
+    <!---<script src='main.js'></script>--> 
 </head>
 <body class="bg-info">
-    <header class="container">
-        <nav class="navbar navbar-expand-sm navbar-dark bg-">
+    <header class="container-fluid bg-image p-0">
+        <nav class="navbar navbar-expand-sm p-5 text-center bg-image" id="cabecera">
              
 
-            <img
-                class="col"
-                id="balde"
-                src="./img/balde.svg"
-                alt="Balde lleno de espuma"
-                height="188"
-                width="184" />
-            <img
-                class="col"
-                id="esponja"
-                src="./img/esponja.svg"
-                alt="Esponja para limpiar"
-                height="82"
-                width="78" />
-            <a href="#" class="col">
-
+            <a href="#" class="mx-auto">
             <img
                 
                 id="inicio"
                 src="./img/logo-inicio.svg"
                 alt="icono casa limpia"
+                height="150"
+                width="150"
                  />
 
             </a>    
             
 
-            <img
-                class="col"
-                id="pala"
-                src="./img/pala.svg"
-                alt="Pala para levantar la basura"
-                height="187"
-                width="167" />
-
-            <img
-                class="col"
-                id="atomizador"
-                src="./img/atomizador.svg"
-                alt="Atomizador de agua"
-                height="168"
-                width="173" />
+            
             
 
 
         </nav>
         
-        <div>
+        <div class="row text-center m-0">
             <h1 id="titulo">Gestiona las tareas de tu hogar</h1>
         </div>
         
     </header>
+    <hr
+    class="hr-danger"
+    size="4"
     
+    />
+    <section>
+        
+            <div class="row " id="sticks">
+                
+                <img
+                id="jumping"
+                class="col-4"
+                 src="./img/stickJump.svg" 
+                 alt=""
+                 height="319"
+                 width="301"
+                 />
+
+               
+                
+
+                    <img
+                 
+                    class="col-4"
+                    id="ruleta"
+                    src="./img/ruleta.svg"
+                    alt="cartel de advertencia por tareas de limpieza"
+                    width="200"
+                    
+                    
+                    />
+               
+                
+                
+
+
+                    <img
+                 
+                    class="col-4"
+                    src="./img/stickAlert.svg"
+                    alt="cartel de advertencia por tareas de limpieza"
+                    width="301"
+                    height="319"
+                    
+                    />
+
+                
+                
+
+                
+                 
+
+            
+
+            </div>
+    </section>
+
     <section id="ingresoDeTareas" class="container">
         <div class="row">
             
-            <div class="col-6">
+            <div class="col-md-6">
                 <span><b>1: </b>ingresa la cantidad de tareas para realizar en la semana.</span>
                 <form id="formularioInicio">
                     <label>Ingrese la cantidad de tareas:</label>
@@ -87,7 +116,7 @@
             
                 </form>
             </div>
-            <section id="ocultaIntegrantes" class="col-6">
+            <section id="ocultaIntegrantes" class="col-md-6">
                 <span><b>2: </b>ingresa la cantidad de integrantes de tu familia.</span>
                 <form>
                     <label>Ingrese la cantidad de integrantes:</label>
@@ -102,89 +131,103 @@
     </section>
     
     
-    <section id="ocultaInfoTarea" class="container">
-        <form>
-            <label>Ingrese la tarea de la cual desea obtener más información:</label>
-            <input type="text" name="infoTareaEspecifica"> 
-            <button id="enviaTarea" type="button" class="btn btn-outline-warning btn-lg">Confirmar</button>
-        </form>
-        <form>
-            <label>Ingrese el integrante del cual desea obtener más información:</label>
-            <input type="text" name="infoIntegranteEspecifico"> 
-            <button id="enviaInfoIntegrante" type="button" class="btn btn-outline-warning btn-lg">Confirmar</button>
-        </form>
+    <section id="ocultaInfoTarea" class="mt-5">
+        <span class="row justify-content-center display-6 shadow mb-3" id="busquedas">Busquedas personalizadas:</span>
+        <div class="row justify-content-center" id="areaTexto">
+
+            <form class="col-md-6 text-center">
+                <label>Ingrese la tarea de la cual desea obtener más información:</label>
+                <input type="text" name="infoTareaEspecifica"> 
+                <button id="enviaTarea" type="button" class="btn btn-outline-warning btn-lg">Enviar</button>
+            </form>
+            <form class="col-md-6 text-center">
+                <label>Ingrese el integrante del cual desea obtener más información:</label>
+                <input type="text" name="infoIntegranteEspecifico"> 
+                <button id="enviaInfoIntegrante" type="button" class="btn btn-outline-warning btn-lg">Enviar</button>
+            </form>
+
+        </div>
+        
     </section>
     
     <div class="container">
         <button id="ejecutarFunciones" type="button" class="btn btn-dark btn-lg">Enviar</button>
     </div>
     
-    <section id="ocultaResultadoInfo" class="row">
-        <div class="col-6">
-            <img
-                id="ruleta"
-                src="./img/ruleta.svg"
-                alt="ruleta de la suerte"
-                height="400"
-                width="400" />
-        </div>
-        <div id="mostrarInfo1" class="col-6"></div>
+    <section id="ocultaResultadoInfo" class="mt-5">
+
+    
+
+        <span class="row justify-content-center display-4 shadow" id="resultado">Resultado:</span>
+            
+        <div id="mostrarInfo1" class="text-center mt-5"></div>
 
     </section>
     
-   
 
-    <footer>
-        <div class="row" id="infoPersonal">
-            <span id="autor" class="container"> Developed and designed by Camilo Cuestas Moncada. ©2021. All rights reserved.</span>
+    
+    <footer id="footer">
+        <span class="row justify-content-center" id="autor">Developed and designed by Camilo Cuestas Moncada. ©2021. All rights reserved.</span>
+        <div class="container  p-2">
+            
+            <div class="row justify-content-md-center" id="socialMedia">
+                
+                <div class="col p-3 text-center">
+                    <a href="https://github.com/CamiloCuestasMoncada" target="_blank">
+                        <img
+                            
+                            id="inicio"
+                            src="./img/git-hub.svg"
+                            alt="logo de git-hub"
+                            height="96"
+                            width="106" />
+                    </a>
+                </div>
+                
+                <div class="col p-3 text-center" >
+                
+                    <a href="#">
+                        
+                        <img
+                            
+                            id="inicio"
+                            src="./img/myWebSite.svg"
+                            alt="icono de sitio web"
+                            height="90"
+                            width="100" />
+                    </a>
+    
+                </div>
+                <div class="col p-3 text-center">
+                    <a href="https://www.linkedin.com/in/jos%C3%A9-camilo-cuestas-moncada-06705a1b6/" target="_blank">
+                        <img
+                            
+                            id="inicio"
+                            src="./img/linkedin.svg"
+                            alt="logo de linkedin"
+                            height="90"
+                            width="100" />
+                    </a>                
+                </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            </div>
+
+
+
         </div>
         
-        <div class="row" id="social-media">
-            
-            <div class="col">
-                <a href="https://github.com/CamiloCuestasMoncada" target="_blank">
-                    <img
-                        
-                        id="inicio"
-                        src="./img/git-hub.svg"
-                        alt="logo de git-hub"
-                        height="96"
-                        width="106" />
-                </a>
-            </div>
-            
-            <div class="col" >
-                
-                <a href="#">
-                    
-                    <img
-                        
-                        id="inicio"
-                        src="./img/myWebSite.svg"
-                        alt="icono de sitio web"
-                        height="90"
-                        width="100" />
-                </a>
-
-            </div>
-            
-            <div class="col">
-                <a href="#" >
-                    <img
-                        
-                        id="inicio"
-                        src="./img/linkedin.svg"
-                        alt="logo de "
-                        height="90"
-                        width="100" />
-                </a>                
-            </div>
-            
-            
-            
-        </div>
+        
+        
     </footer>
     
+
       
      
         
