@@ -85,3 +85,28 @@ header{
 #areaTexto{
     background-color: rgb(13,174,201);
 }
+
+#confirmaTareas{
+    display: none;
+}
+
+#confirmaIntegrantes{
+    display: none;
+}
+
+#contenedorTareas{
+    
+    background-color: rgb(229, 218, 118);
+    height: 400px;
+}
+
+#contenedorIntegrantes{
+    
+    background-color: rgb(198, 186, 93);
+    height: 400px;
+}
+
+#infoIngresada{
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
