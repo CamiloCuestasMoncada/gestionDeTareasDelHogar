@@ -103,40 +103,47 @@ const $botonGenerarCantidadIntegrantes = document.querySelector('#enviarIntegran
 $botonGenerarCantidadIntegrantes.onclick = ()=>{
     const $numeroIntegrantes = document.querySelector('[name=numIntegrantes]').value;
     creaCamposNombresIntegrantes($numeroIntegrantes);
-    document.querySelector('#confirmaIntegrantes').style.display="block";
+    
 }
 
 
 let listaTareas = [];
 let listaIntegrantes = [];
+let arrayIntegranteYtarea = [];
 
 let = clickEnBotonConfirmaTareas = false;
 const $botonConfirmaTareas = document.querySelector('#confirmaTareas');
 $botonConfirmaTareas.onclick = ()=>{
-    const $numeroIntegrantes = document.querySelector('[name=numIntegrantes]').value;
-    clickEnBotonConfirmaTareas = true;
-    listaIntegrantes = integrantes($numeroIntegrantes);
-    const $numeroDeTareas = document.querySelector('[name=numTareas]').value;
-    listaTareas = tareas($numeroDeTareas);
-}
-
-
-
-
-
-let = clickEnBotonConfirmaIntegrantes = false;
-const $botonConfirmaIntegrantes = document.querySelector('#confirmaIntegrantes');
-$botonConfirmaIntegrantes.onclick = ()=>{
-    const $numeroDeTareas = document.querySelector('[name=numTareas]').value;
-    const $numeroIntegrantes = document.querySelector('[name=numIntegrantes]').value;
-    clickEnBotonConfirmaIntegrantes = true;
-    if(clickEnBotonConfirmaTareas && clickEnBotonConfirmaIntegrantes){
-        dibujaTareasEintegrantes($numeroDeTareas,$numeroIntegrantes);
+    let completadoCorrectamente = verificaQueNoHayaCamposVacios();
+    if(completadoCorrectamente){
+        const $numeroIntegrantes = document.querySelector('[name=numIntegrantes]').value;
+        clickEnBotonConfirmaTareas = true;
+        listaIntegrantes = integrantes($numeroIntegrantes);
+        const $numeroDeTareas = document.querySelector('[name=numTareas]').value;
+        listaTareas = tareas($numeroDeTareas);
+        document.querySelector('#botonEnviarTareas').style.display='none';
+        document.querySelector('#confirmaIntegrantes').style.display="block";
+    }else{
+        alert('El formulario esta incompleto')
     }
 }
 
-
-
+let verificaQueNoHayaCamposVacios = () =>{
+    const $numeroDeTareas = document.querySelector('[name=numTareas]').value;
+    listaTareas = tareas($numeroDeTareas);
+    for(let i = 0; i < listaTareas.length; i++){
+        if(listaTareas[i]===""){
+            document.querySelector(`#inputId${i}`).style.backgroundColor="#ff9191";
+            document.querySelector(`#inputId${i}`).placeholder="No puede estar vacio";
+            
+            
+            return false;
+        }
+            
+        
+    }
+    return true;
+}
 
 function tareas(numeroDeTareas){
 
@@ -161,6 +168,33 @@ function integrantes(numeroDeIntegrantes){
 
 
 }
+
+
+
+
+
+
+
+
+
+let = clickEnBotonConfirmaIntegrantes = false;
+const $botonConfirmaIntegrantes = document.querySelector('#confirmaIntegrantes');
+$botonConfirmaIntegrantes.onclick = ()=>{
+    const $numeroDeTareas = document.querySelector('[name=numTareas]').value;
+    const $numeroIntegrantes = document.querySelector('[name=numIntegrantes]').value;
+    clickEnBotonConfirmaIntegrantes = true;
+    document.querySelector('#enviarIntegrantes').style.display='none';
+    if(clickEnBotonConfirmaTareas && clickEnBotonConfirmaIntegrantes){
+        dibujaTareasEintegrantes($numeroDeTareas,$numeroIntegrantes);
+        document.querySelector('#botonContinuar').style.display='block';
+        
+    }
+}
+
+
+
+
+
 
  
 
@@ -205,3 +239,70 @@ function dibujaTareasEintegrantes(cantTareas,cantIntegrantes){
 
 
 
+
+const $botonContinuar = document.querySelector('#botonContinuar');
+    $botonContinuar.onclick = ()=>{
+
+        let arrayIntegranteYtarea = asignaUnIntegranteAcadaTarea(listaTareas,listaIntegrantes);
+        let listaDeIntegrantesFinalizada=crearIntegrante(arrayIntegranteYtarea);
+        let arrayIntegranteYtareaParaInspector = asignaUnInspectorAcadaTarea(listaTareas,listaIntegrantes,listaDeIntegrantesFinalizada);
+        console.log(listaDeIntegrantesFinalizada)
+        console.log(creaInspectores(arrayIntegranteYtareaParaInspector));
+        //infoIntegranteEspecifico();
+        //infoTareaEspecifica();
+    }
+
+function asignaUnIntegranteAcadaTarea(listaTareas,listaIntegrantes){
+    let arrayTareaEintegrante = [];
+    for(let i = 0; i < listaTareas.length; i++){
+        let integranteAleatorio = Math.floor(Math.random()*(listaIntegrantes.length));
+        arrayTareaEintegrante[i]=[listaTareas[i],listaIntegrantes[integranteAleatorio]];
+    }
+    return arrayTareaEintegrante;
+    
+}
+
+function asignaUnInspectorAcadaTarea(listaTareas,listaIntegrantes,listaDeIntegrantesFinalizada){
+    let arrayTareaEintegrante = [];
+    for(let i = 0; i < listaTareas.length; i++){
+        let indexIntegranteAleatorio = Math.floor(Math.random()*(listaIntegrantes.length));
+        let integranteAleatorio = listaIntegrantes[indexIntegranteAleatorio];
+        if(integranteAleatorio != listaDeIntegrantesFinalizada[i].nombre){
+            arrayTareaEintegrante[i]=[listaTareas[i],integranteAleatorio];
+        } else {
+            i--;
+        }
+        
+    }
+    return arrayTareaEintegrante;
+    
+}
+    
+        
+        
+    
+
+
+function crearIntegrante(arrayIntegranteYtarea){
+    listaObjetoIntegrantes = [];
+    for(let i=0; i<arrayIntegranteYtarea.length; i++){
+        let integrante = new Integrantes(arrayIntegranteYtarea[i][1],arrayIntegranteYtarea[i][0]);
+        listaObjetoIntegrantes.push(integrante);
+    }
+
+    return listaObjetoIntegrantes;
+
+    
+
+}
+
+function creaInspectores(arrayIntegranteYtareaParaInspector){
+    listaObjetoInspectores=[];
+    for(let i=0; i<arrayIntegranteYtareaParaInspector.length; i++){
+    let inspector = new Inspectores(arrayIntegranteYtareaParaInspector[i][1],arrayIntegranteYtareaParaInspector[i][0]);
+    listaObjetoInspectores.push(inspector);
+    }
+
+    return listaObjetoInspectores;
+
+}

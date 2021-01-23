@@ -1,3 +1,13 @@
+::-webkit-input-placeholder { color: white; } 
+
+:-moz-placeholder { /* Firefox 18- */ color: white; } 
+
+::-moz-placeholder { /* Firefox 19+ */ color: white; } 
+
+:-ms-input-placeholder { color: white; }
+
+
+
 #ocultaInfoTarea{
     display: none;
 }
@@ -109,4 +119,9 @@ header{
 #infoIngresada{
     margin-top: 20px;
     margin-bottom: 30px;
+}
+
+#botonContinuar{
+    display: none;
+    
 }
