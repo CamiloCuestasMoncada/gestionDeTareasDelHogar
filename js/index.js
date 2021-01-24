@@ -1,4 +1,23 @@
 
+class Inspectores{
+    
+    constructor(nombre,tareas){
+        this.nombre = nombre;
+        this.tareas = tareas;
+
+    }
+    
+
+}
+
+class Integrantes extends Inspectores{
+    constructor(nombre,tareas){
+    super(nombre,tareas)
+
+    }
+}
+
+
 
 
 const creaCamposNombresTareas = numTareas =>{
@@ -71,23 +90,6 @@ const creaCamposNombresIntegrantes = numIntegrantes =>{
 
 
 
-class Inspectores{
-    
-    constructor(nombre,tareas){
-        this.nombre = nombre;
-        this.tareas = tareas;
-
-    }
-    
-
-}
-
-class Integrantes extends Inspectores{
-    constructor(nombre,tareas){
-    super(nombre,tareas)
-
-    }
-}
 
 
 
@@ -246,8 +248,10 @@ const $botonContinuar = document.querySelector('#botonContinuar');
         let arrayIntegranteYtarea = asignaUnIntegranteAcadaTarea(listaTareas,listaIntegrantes);
         let listaDeIntegrantesFinalizada=crearIntegrante(arrayIntegranteYtarea);
         let arrayIntegranteYtareaParaInspector = asignaUnInspectorAcadaTarea(listaTareas,listaIntegrantes,listaDeIntegrantesFinalizada);
+        let listaInspectoresFinalizada = creaInspectores(arrayIntegranteYtareaParaInspector);
         console.log(listaDeIntegrantesFinalizada)
-        console.log(creaInspectores(arrayIntegranteYtareaParaInspector));
+        console.log(listaInspectoresFinalizada);
+        dibujaResultados(listaDeIntegrantesFinalizada,listaInspectoresFinalizada);
         //infoIntegranteEspecifico();
         //infoTareaEspecifica();
     }
@@ -306,3 +310,74 @@ function creaInspectores(arrayIntegranteYtareaParaInspector){
     return listaObjetoInspectores;
 
 }
+
+function dibujaResultados(listaIntegrantesFinalizada,listaInspectoresFinalizada){
+    
+    const $sectionMuestraInfo = document.querySelector('#resultadosGenerales');
+    const $tituloIntegrantes = document.createElement('h2');
+    const $tituloInspectores = document.createElement('h2');
+    $tituloIntegrantes.textContent = 'Resultados:';
+    $tituloIntegrantes.id='tituloResultados';
+    $tituloIntegrantes.className='display-4';
+    $tituloInspectores.textContent = 'Inspectores:';
+    $tituloInspectores.id='tituloInspectores';
+    $tituloInspectores.className='display-4';
+    const $contenedorIntegrantesFinalizados = document.createElement('div');
+    const $contenedorInspectores = document.createElement('div');
+    $contenedorIntegrantesFinalizados.id='contenedorIntegrantesFinalizados';
+    $contenedorIntegrantesFinalizados.className='col-4';
+    $contenedorInspectores.id='contenedorInspectores';
+    $contenedorInspectores.className='col-4';
+    
+    $sectionMuestraInfo.appendChild($contenedorIntegrantesFinalizados);
+    $sectionMuestraInfo.appendChild($contenedorInspectores);
+    const $contenedorListaIntegrantesFinalizados = document.createElement('ol');
+    const $contenedorListaInspectores = document.createElement('ol');
+    $contenedorListaIntegrantesFinalizados.appendChild($tituloIntegrantes);
+    $contenedorListaInspectores.appendChild($tituloInspectores);
+    
+    $contenedorIntegrantesFinalizados.appendChild($contenedorListaIntegrantesFinalizados);
+    $contenedorInspectores.appendChild($contenedorListaInspectores);
+    for(let i = 0; i<listaIntegrantesFinalizada.length; i++){
+        const $elementosDeListaIntegrantesFinalizados = document.createElement('li');
+        $contenedorListaIntegrantesFinalizados.appendChild($elementosDeListaIntegrantesFinalizados);
+        
+        $elementosDeListaIntegrantesFinalizados.id=`liIntegrante-${i}`;
+
+        $elementosDeListaIntegrantesFinalizados.textContent=`Tarea: ${listaIntegrantesFinalizada[i].tareas} Responsable ${listaIntegrantesFinalizada[i].nombre}`;
+    }
+
+    for(let i = 0; i<listaInspectoresFinalizada.length; i++){
+
+        const $elementosDeListaInspectores = document.createElement('li');
+        
+        $contenedorListaInspectores.appendChild($elementosDeListaInspectores);
+        
+        $elementosDeListaInspectores.id=`liInspector-${i}`;
+
+        $elementosDeListaInspectores.textContent=`Tarea: ${listaInspectoresFinalizada[i].tareas} Inspector: ${listaInspectoresFinalizada[i].nombre}`;
+    }
+}
+
+const $botondescargar = document.querySelector('#descargarPdf');
+$botondescargar.onclick = ()=>{
+    document.querySelector('#contenedorIntegrantesFinalizados').style.width="100%";
+    document.querySelector('#contenedorInspectores').style.width="100%";
+    document.querySelector('#contenedorIntegrantesFinalizados').style.height="545px";
+    document.querySelector('#contenedorInspectores').style.height="545px";
+    document.querySelector('#contenedorInspectores').style.backgroundColor='#e5da76';
+    document.querySelector('#contenedorIntegrantesFinalizados').style.backgroundColor='#12a7c7';
+    let element = document.querySelector('#resultadosGenerales');
+    
+    html2pdf()
+    .from(element)
+    .save();
+    setTimeout(function(){document.querySelector('#contenedorIntegrantesFinalizados').style.width=""},0001);
+    setTimeout(function(){document.querySelector('#contenedorInspectores').style.width=""},0001);
+    setTimeout(function(){document.querySelector('#contenedorIntegrantesFinalizados').style.height="400px"},0001);
+    setTimeout(function(){document.querySelector('#contenedorInspectores').style.height="400px"},0001);
+    setTimeout(function(){document.querySelector('#contenedorInspectores').style.backgroundColor='#c6ba5d'},0001);
+    setTimeout(function(){document.querySelector('#contenedorIntegrantesFinalizados').style.backgroundColor='#e5da76'},0001);
+}
+    
+

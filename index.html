@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>-->
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
     
 </head>
 <body class="bg-info">
@@ -131,9 +132,19 @@
     </section>
 
     <section class="container">
-        <div class="row justify-content-center" id=infoIngresada></div>
+        <div class="row justify-content-center" id="infoIngresada"></div>
 
     </section>
+    
+    <section class="container">
+        <div class="row justify-content-center" id="resultadosGenerales"></div>
+    </section>
+    
+    <button id="descargarPdf" class="btn btn-outline-warning btn-lg">Descargar</button>
+    
+    
+    
+    
     <div id="contenedorBotonContinuar" class="d-grid gap-2 col-6 mx-auto">
         <button class="btn btn-outline-warning btn-lg justify-content-center" type="button" id="botonContinuar">Continuar</button>
     </div>
