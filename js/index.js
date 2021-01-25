@@ -125,6 +125,8 @@ $botonConfirmaTareas.onclick = ()=>{
         listaTareas = tareas($numeroDeTareas);
         document.querySelector('#botonEnviarTareas').style.display='none';
         document.querySelector('#confirmaIntegrantes').style.display="block";
+        document.querySelector('#check_icon').style.display='block';
+        $botonConfirmaTareas.style.display='none';
     }else{
         alert('El formulario esta incompleto')
     }
@@ -214,9 +216,16 @@ function dibujaTareasEintegrantes(cantTareas,cantIntegrantes){
     $sectionMuestraInfo.appendChild($contenedorIntegrantes);
     const $contenedorListaTareas = document.createElement('ol');
     const $contenedorListaIntegrantes = document.createElement('ol');
+    const $tituloTareas = document.createElement('h2');
+    const $tituloIntegrantes = document.createElement('h2');
+    $tituloTareas.textContent='Tareas:';
+    $tituloTareas.id='tituloListaTareas';
+    $tituloIntegrantes.textContent='Integrantes:';
+    $tituloIntegrantes.id='tituloListaIntegrantes';
     
-    
+    $contenedorTareas.appendChild($tituloTareas);
     $contenedorTareas.appendChild($contenedorListaTareas);
+    $contenedorIntegrantes.appendChild($tituloIntegrantes);
     $contenedorIntegrantes.appendChild($contenedorListaIntegrantes);
     for(let i = 0; i<cantTareas; i++){
         const $elementosDeListaTareas = document.createElement('li');
@@ -311,73 +320,150 @@ function creaInspectores(arrayIntegranteYtareaParaInspector){
 
 }
 
-function dibujaResultados(listaIntegrantesFinalizada,listaInspectoresFinalizada){
+function dibujaResultados(listaDeIntegrantesFinalizada,listaInspectoresFinalizada){
+    creaTablaResultadoGeneral(listaDeIntegrantesFinalizada);
+    creaTablaResultadoInspectores(listaInspectoresFinalizada);
     
+}
+
+
+function creaTablaResultadoGeneral(listaIntegrantesFinalizada){
     const $sectionMuestraInfo = document.querySelector('#resultadosGenerales');
-    const $tituloIntegrantes = document.createElement('h2');
-    const $tituloInspectores = document.createElement('h2');
-    $tituloIntegrantes.textContent = 'Resultados:';
-    $tituloIntegrantes.id='tituloResultados';
-    $tituloIntegrantes.className='display-4';
-    $tituloInspectores.textContent = 'Inspectores:';
-    $tituloInspectores.id='tituloInspectores';
-    $tituloInspectores.className='display-4';
-    const $contenedorIntegrantesFinalizados = document.createElement('div');
-    const $contenedorInspectores = document.createElement('div');
-    $contenedorIntegrantesFinalizados.id='contenedorIntegrantesFinalizados';
-    $contenedorIntegrantesFinalizados.className='col-4';
-    $contenedorInspectores.id='contenedorInspectores';
-    $contenedorInspectores.className='col-4';
-    
+    const $contenedorIntegrantesFinalizados = document.querySelector('#info1');
     $sectionMuestraInfo.appendChild($contenedorIntegrantesFinalizados);
-    $sectionMuestraInfo.appendChild($contenedorInspectores);
-    const $contenedorListaIntegrantesFinalizados = document.createElement('ol');
-    const $contenedorListaInspectores = document.createElement('ol');
-    $contenedorListaIntegrantesFinalizados.appendChild($tituloIntegrantes);
-    $contenedorListaInspectores.appendChild($tituloInspectores);
-    
-    $contenedorIntegrantesFinalizados.appendChild($contenedorListaIntegrantesFinalizados);
-    $contenedorInspectores.appendChild($contenedorListaInspectores);
+    //crea head de la tabla
+    const $contenedorCabecera = document.createElement('tr');
+    document.querySelector('#encabezadoTablaResultados').appendChild($contenedorCabecera);
+    const $tituloColumna1 = document.createElement('th');
+    const $tituloColumna2 = document.createElement('th');
+    const $tituloColumna3 = document.createElement('th');
+    $contenedorCabecera.appendChild($tituloColumna1);
+    $contenedorCabecera.appendChild($tituloColumna2);
+    $contenedorCabecera.appendChild($tituloColumna3);
+    $tituloColumna1.scope='col';
+    $tituloColumna2.scope='col';
+    $tituloColumna3.scope='col';
+    $tituloColumna3.id="tituloColumnaIntegrante";
+    $tituloColumna1.textContent=`#`;
+    $tituloColumna2.textContent="Tarea:";
+    $tituloColumna3.textContent="Responsable:";
+
+
     for(let i = 0; i<listaIntegrantesFinalizada.length; i++){
-        const $elementosDeListaIntegrantesFinalizados = document.createElement('li');
-        $contenedorListaIntegrantesFinalizados.appendChild($elementosDeListaIntegrantesFinalizados);
+
+
+        //crea cuerpo de la tabla
+        const $contenedorResultado = document.createElement('tr');
+        document.querySelector('#cuerpoTablaResultados').appendChild($contenedorResultado);
         
-        $elementosDeListaIntegrantesFinalizados.id=`liIntegrante-${i}`;
 
-        $elementosDeListaIntegrantesFinalizados.textContent=`Tarea: ${listaIntegrantesFinalizada[i].tareas} Responsable ${listaIntegrantesFinalizada[i].nombre}`;
-    }
 
-    for(let i = 0; i<listaInspectoresFinalizada.length; i++){
+        const $numeracionTabla = document.createElement('th');
+        $contenedorResultado.appendChild($numeracionTabla);
 
-        const $elementosDeListaInspectores = document.createElement('li');
-        
-        $contenedorListaInspectores.appendChild($elementosDeListaInspectores);
-        
-        $elementosDeListaInspectores.id=`liInspector-${i}`;
+        const $resultadoNombreIntegrante = document.createElement('td');
+        const $resultadoTareaIntegrante = document.createElement('td');
 
-        $elementosDeListaInspectores.textContent=`Tarea: ${listaInspectoresFinalizada[i].tareas} Inspector: ${listaInspectoresFinalizada[i].nombre}`;
+        $contenedorResultado.appendChild($resultadoNombreIntegrante);
+        $contenedorResultado.appendChild($resultadoTareaIntegrante);
+    
+        $numeracionTabla.textContent = i+1;
+        $numeracionTabla.scope='row';
+
+
+        $resultadoNombreIntegrante.id=`liIntegrante-${i}`;
+        $resultadoTareaIntegrante.id=`liIntegrante-${i}`;
+
+
+        $resultadoNombreIntegrante.textContent=`${listaIntegrantesFinalizada[i].tareas}`;
+        $resultadoTareaIntegrante.textContent=`${listaIntegrantesFinalizada[i].nombre}`;
     }
 }
 
+
+
+function creaTablaResultadoInspectores(listaInspectoresFinalizada){
+    const $sectionMuestraInfo2 = document.querySelector('#resultadosGenerales');
+    const $contenedorInspectores = document.querySelector('#info2');
+    $sectionMuestraInfo2.appendChild($contenedorInspectores);
+    //crea head de la tabla
+    const $contenedorCabecera2 = document.createElement('tr');
+    document.querySelector('#encabezadoTablaInspectores').appendChild($contenedorCabecera2);
+    const $tituloColumna1 = document.createElement('th');
+    const $tituloColumna2 = document.createElement('th');
+    const $tituloColumna3 = document.createElement('th');
+    $contenedorCabecera2.appendChild($tituloColumna1);
+    $contenedorCabecera2.appendChild($tituloColumna2);
+    $contenedorCabecera2.appendChild($tituloColumna3);
+    $tituloColumna1.scope='col';
+    $tituloColumna2.scope='col';
+    $tituloColumna3.scope='col';
+    $tituloColumna3.id='tituloColumnaInspector';
+    $tituloColumna1.textContent=`#`;
+    $tituloColumna2.textContent="Tarea:";
+    $tituloColumna3.textContent="Inspectores:";
+
+
+    for(let i = 0; i<listaInspectoresFinalizada.length; i++){
+
+
+        //crea cuerpo de la tabla
+        const $contenedorResultado2 = document.createElement('tr');
+        document.querySelector('#cuerpoTablaInspectores').appendChild($contenedorResultado2);
+        
+
+
+        const $numeracionTabla2 = document.createElement('th');
+        $contenedorResultado2.appendChild($numeracionTabla2);
+
+        const $resultadoNombreInspector = document.createElement('td');
+        const $resultadoTareaInspector = document.createElement('td');
+
+        $contenedorResultado2.appendChild($resultadoNombreInspector);
+        $contenedorResultado2.appendChild($resultadoTareaInspector);
+    
+        $numeracionTabla2.textContent = i+1;
+        $numeracionTabla2.scope='row';
+
+
+        $resultadoNombreInspector.id=`liIntegrante-${i}`;
+        $resultadoTareaInspector.id=`liIntegrante-${i}`;
+
+
+        $resultadoNombreInspector.textContent=`${listaInspectoresFinalizada[i].tareas}`;
+        $resultadoTareaInspector.textContent=`${listaInspectoresFinalizada[i].nombre}`;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 const $botondescargar = document.querySelector('#descargarPdf');
 $botondescargar.onclick = ()=>{
-    document.querySelector('#contenedorIntegrantesFinalizados').style.width="100%";
-    document.querySelector('#contenedorInspectores').style.width="100%";
-    document.querySelector('#contenedorIntegrantesFinalizados').style.height="545px";
-    document.querySelector('#contenedorInspectores').style.height="545px";
-    document.querySelector('#contenedorInspectores').style.backgroundColor='#e5da76';
-    document.querySelector('#contenedorIntegrantesFinalizados').style.backgroundColor='#12a7c7';
+    document.querySelector('#info1').style.width="100%";
+    document.querySelector('#info2').style.width="100%";
+    document.querySelector('#info1').style.height="1100px";
+    document.querySelector('#info2').style.height="1100px";
+    //document.querySelector('#info2').style.backgroundColor='#e5da76';
+    //document.querySelector('#info1').style.backgroundColor='#12a7c7';
     let element = document.querySelector('#resultadosGenerales');
     
     html2pdf()
     .from(element)
     .save();
-    setTimeout(function(){document.querySelector('#contenedorIntegrantesFinalizados').style.width=""},0001);
-    setTimeout(function(){document.querySelector('#contenedorInspectores').style.width=""},0001);
-    setTimeout(function(){document.querySelector('#contenedorIntegrantesFinalizados').style.height="400px"},0001);
-    setTimeout(function(){document.querySelector('#contenedorInspectores').style.height="400px"},0001);
-    setTimeout(function(){document.querySelector('#contenedorInspectores').style.backgroundColor='#c6ba5d'},0001);
-    setTimeout(function(){document.querySelector('#contenedorIntegrantesFinalizados').style.backgroundColor='#e5da76'},0001);
+    setTimeout(function(){document.querySelector('#info1').style.width=""},0001);
+    setTimeout(function(){document.querySelector('#info2').style.width=""},0001);
+    setTimeout(function(){document.querySelector('#info1').style.height=""},0001);
+    setTimeout(function(){document.querySelector('#info2').style.height=""},0001);
+    //setTimeout(function(){document.querySelector('#info2').style.backgroundColor='#c6ba5d'},0001);
+    //setTimeout(function(){document.querySelector('#info1').style.backgroundColor='#e5da76'},0001);
 }
     
 

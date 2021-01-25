@@ -112,9 +112,11 @@
                     <button type="button" id="botonEnviarTareas" class="btn btn-outline-warning btn-lg">Enviar</button>
                     <div id="camposTareas"></div>
                     <button id="confirmaTareas" class="btn btn-outline-warning btn-lg" type="button">Confirmar</button>
+                    <img src="./img/checkIcon.svg" alt="check icon" id="check_icon"/>
             
             
                 </form>
+                
             </div>
             <section id="ocultaIntegrantes" class="col-md-6">
                 <span><b>2: </b>ingresa la cantidad de integrantes de tu familia.</span>
@@ -137,7 +139,18 @@
     </section>
     
     <section class="container">
-        <div class="row justify-content-center" id="resultadosGenerales"></div>
+        <div class="row justify-content-center" id="resultadosGenerales">
+            <table id="info1" class="col-4 table table-striped table-hover border-dark">
+                
+                <thead id="encabezadoTablaResultados"></thead>
+                <tbody id="cuerpoTablaResultados"></tbody>
+            </table>
+            
+            <table id="info2" class="col-4 table table-striped table-hover border-dark">
+                <thead id="encabezadoTablaInspectores"></thead>
+                <tbody id="cuerpoTablaInspectores"></tbody>
+            </table>
+        </div>
     </section>
     
     <button id="descargarPdf" class="btn btn-outline-warning btn-lg">Descargar</button>
@@ -170,6 +183,7 @@
     
     <div class="container">
         <button id="ejecutarFunciones" type="button" class="btn btn-dark btn-lg">Enviar</button>
+        
     </div>
     
     <section id="ocultaResultadoInfo" class="mt-5">
