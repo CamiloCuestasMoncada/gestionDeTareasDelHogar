@@ -11,10 +11,8 @@
     <link rel="stylesheet" href="main.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
-    <!---<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">-->
-    <!---<link rel='stylesheet' type='text/css' media='screen' href='main.css'>--> 
-    <!---<script src='main.js'></script>--> 
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>-->
+    
 </head>
 <body class="bg-info">
     <header class="container-fluid bg-image p-0">
@@ -110,8 +108,9 @@
                 <form id="formularioInicio">
                     <label>Ingrese la cantidad de tareas:</label>
                     <input name="numTareas" type="number">
-                    <button type="button" id="botonEnviarTareas" class="btn btn-outline-warning btn-lg">Confirmar</button>
+                    <button type="button" id="botonEnviarTareas" class="btn btn-outline-warning btn-lg">Enviar</button>
                     <div id="camposTareas"></div>
+                    <button id="confirmaTareas" class="btn btn-outline-warning btn-lg" type="button">Confirmar</button>
             
             
                 </form>
@@ -121,15 +120,23 @@
                 <form>
                     <label>Ingrese la cantidad de integrantes:</label>
                     <input type="number" name="numIntegrantes">
-                    <button id="enviarIntegrantes" type="button" class="btn btn-outline-warning btn-lg">Confirmar</button>
+                    <button id="enviarIntegrantes" type="button" class="btn btn-outline-warning btn-lg">Enviar</button>
                     <div id="camposIntegrantes"></div> 
+                    <button id="confirmaIntegrantes" class="btn btn-outline-warning btn-lg" type="button">Confirmar</button>
                 </form>
                 
             </section>
         </div>
         
     </section>
-    
+
+    <section class="container">
+        <div class="row justify-content-center" id=infoIngresada></div>
+
+    </section>
+    <div id="contenedorBotonContinuar" class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-outline-warning btn-lg justify-content-center" type="button" id="botonContinuar">Continuar</button>
+    </div>
     
     <section id="ocultaInfoTarea" class="mt-5">
         <span class="row justify-content-center display-6 shadow mb-3" id="busquedas">Busquedas personalizadas:</span>
@@ -238,7 +245,7 @@
         
     
 </body>
-<script src="./js/gsap.js"></script>
+<!--<script src="./js/gsap.js"></script>-->
 <script src="js/dom.js"></script>
 <script src="js/index.js"></script>
 </html>

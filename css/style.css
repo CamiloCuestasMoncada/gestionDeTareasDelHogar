@@ -1,3 +1,13 @@
+::-webkit-input-placeholder { color: white; } 
+
+:-moz-placeholder { /* Firefox 18- */ color: white; } 
+
+::-moz-placeholder { /* Firefox 19+ */ color: white; } 
+
+:-ms-input-placeholder { color: white; }
+
+
+
 #ocultaInfoTarea{
     display: none;
 }
@@ -84,4 +94,34 @@ header{
 
 #areaTexto{
     background-color: rgb(13,174,201);
+}
+
+#confirmaTareas{
+    display: none;
+}
+
+#confirmaIntegrantes{
+    display: none;
+}
+
+#contenedorTareas{
+    
+    background-color: rgb(229, 218, 118);
+    height: 400px;
+}
+
+#contenedorIntegrantes{
+    
+    background-color: rgb(198, 186, 93);
+    height: 400px;
+}
+
+#infoIngresada{
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+#botonContinuar{
+    display: none;
+    
 }
