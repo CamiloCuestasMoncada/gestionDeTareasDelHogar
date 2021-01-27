@@ -16,11 +16,12 @@
     display: none;
 }
 
-/*#ocultaIntegrantes{
+
+#ocultaBtnEnviarTareas{
     display: none;
 }
-*/
-#ocultaBtnEnviarTareas{
+
+#enviarIntegrantes{
     display: none;
 }
 
@@ -127,7 +128,7 @@ header{
 }
 
 #info1{
-    background-color: rgb(59, 246, 255);;
+    background-color: rgb(53, 221, 239);
     /*height: 400px;*/
     
 }
@@ -160,5 +161,14 @@ header{
 #check_icon{
     width: 40px;
     height: 40px;
+    display: none;
+}
+
+#ruleta2{
+    display: none;
+    width: 300px;
+}
+
+#descargarPdf{
     display: none;
 }
