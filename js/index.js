@@ -17,7 +17,42 @@ class Integrantes extends Inspectores{
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('input[type=number]').forEach( node => node.addEventListener('keypress', e => {
+      if(e.keyCode == 13) {
+        e.preventDefault();
+      }
+    }))
+  });
 
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('input[type=text]').forEach( node => node.addEventListener('keypress', e => {
+      if(e.keyCode == 13) {
+        e.preventDefault();
+      }
+    }))
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+const $botonGenerarCantidadTareas = document.querySelector('#botonEnviarTareas');
+$botonGenerarCantidadTareas.onclick = ()=>{
+    const $numeroDeTareas = document.querySelector('[name=numTareas]').value;
+    
+    creaCamposNombresTareas($numeroDeTareas);
+    document.querySelector('#confirmaTareas').style.display="block";
+}
 
 
 const creaCamposNombresTareas = numTareas =>{
@@ -39,95 +74,40 @@ const creaCamposNombresTareas = numTareas =>{
         $divCampoTareas.id=`filaInput${i}`;
 
     }
-    /*gsap.to('#filaInput0',{
-        duration:4,
-        y:7,
-        ease: 'elastic',
-        
-        
-    });
     
-    gsap.to('#filaInput1',{
-        duration:6,
-        y:7,
-        ease: 'elastic',
-        
-        
-    });
-    
-    gsap.to('#filaInput2',{
-        duration:8,
-        y:7,
-        ease: 'elastic',
-        
-        
-    });*/
 
 }
 
-const creaCamposNombresIntegrantes = numIntegrantes =>{
-
-    
-    
-    for(let i = 0; i < numIntegrantes; i++){
-    
-        const $divCampoIntegrantes = document.createElement("div");
-        const $labelCampoIntegrantes = document.createElement("label");
-        const $inputCampoIntegrantes = document.createElement("input");
-        document.querySelector("#camposIntegrantes").appendChild($divCampoIntegrantes);
-        $divCampoIntegrantes.appendChild($labelCampoIntegrantes);
-        $divCampoIntegrantes.appendChild($inputCampoIntegrantes);
-        $labelCampoIntegrantes.textContent=`Ingrese el nombre del integrante:  ${i+1}:`; 
-        $inputCampoIntegrantes.name=`inputIntegrante${i}`;
-        $inputCampoIntegrantes.type="text";
-        $inputCampoIntegrantes.id=`inputIntegrante${i}`;
-
-    }
-
-}
-
-
-
-
-
-
-
-
-const $botonGenerarCantidadTareas = document.querySelector('#botonEnviarTareas');
-$botonGenerarCantidadTareas.onclick = ()=>{
-    const $numeroDeTareas = document.querySelector('[name=numTareas]').value;
-    creaCamposNombresTareas($numeroDeTareas);
-    document.querySelector('#confirmaTareas').style.display="block";
-}
-
-
-const $botonGenerarCantidadIntegrantes = document.querySelector('#enviarIntegrantes');     
-$botonGenerarCantidadIntegrantes.onclick = ()=>{
-    const $numeroIntegrantes = document.querySelector('[name=numIntegrantes]').value;
-    creaCamposNombresIntegrantes($numeroIntegrantes);
-    
-}
 
 
 let listaTareas = [];
 let listaIntegrantes = [];
 let arrayIntegranteYtarea = [];
+let arrayIntegranteYtareaParaInspector = [];
+let listaDeIntegrantesFinalizada = [];
 
 let = clickEnBotonConfirmaTareas = false;
 const $botonConfirmaTareas = document.querySelector('#confirmaTareas');
 $botonConfirmaTareas.onclick = ()=>{
     let completadoCorrectamente = verificaQueNoHayaCamposVacios();
     if(completadoCorrectamente){
-        const $numeroIntegrantes = document.querySelector('[name=numIntegrantes]').value;
+        
+        setBgColorInputs();
+        
         clickEnBotonConfirmaTareas = true;
-        listaIntegrantes = integrantes($numeroIntegrantes);
+        
         const $numeroDeTareas = document.querySelector('[name=numTareas]').value;
         listaTareas = tareas($numeroDeTareas);
         document.querySelector('#botonEnviarTareas').style.display='none';
-        document.querySelector('#confirmaIntegrantes').style.display="block";
-    }else{
-        alert('El formulario esta incompleto')
+        
+        document.querySelector('#check_icon').style.display='block';
+        $botonConfirmaTareas.style.display='none';
+        $botonGenerarCantidadIntegrantes.style.display='initial';
     }
+}
+
+function setBgColorInputs() {
+    document.querySelectorAll('input').forEach(el => el.style.backgroundColor =  '#ffffff');
 }
 
 let verificaQueNoHayaCamposVacios = () =>{
@@ -160,6 +140,66 @@ function tareas(numeroDeTareas){
 
 
 
+const $botonGenerarCantidadIntegrantes = document.querySelector('#enviarIntegrantes');
+$botonGenerarCantidadIntegrantes.onclick = ()=>{
+    const $numeroIntegrantes = document.querySelector('[name=numIntegrantes]').value;
+    creaCamposNombresIntegrantes($numeroIntegrantes);
+    document.querySelector('#confirmaIntegrantes').style.display="block";
+
+    
+}
+
+
+const creaCamposNombresIntegrantes = numIntegrantes =>{
+
+    
+    
+    for(let i = 0; i < numIntegrantes; i++){
+    
+        const $divCampoIntegrantes = document.createElement("div");
+        const $labelCampoIntegrantes = document.createElement("label");
+        const $inputCampoIntegrantes = document.createElement("input");
+        document.querySelector("#camposIntegrantes").appendChild($divCampoIntegrantes);
+        $divCampoIntegrantes.appendChild($labelCampoIntegrantes);
+        $divCampoIntegrantes.appendChild($inputCampoIntegrantes);
+        $labelCampoIntegrantes.textContent=`Ingrese el nombre del integrante:  ${i+1}:`; 
+        $inputCampoIntegrantes.name=`inputIntegrante${i}`;
+        $inputCampoIntegrantes.type="text";
+        $inputCampoIntegrantes.id=`inputIntegrante${i}`;
+
+    }
+
+}
+
+
+
+
+
+let = clickEnBotonConfirmaIntegrantes = false;
+const $botonConfirmaIntegrantes = document.querySelector('#confirmaIntegrantes');
+$botonConfirmaIntegrantes.onclick = ()=>{
+    const $numeroIntegrantes = document.querySelector('[name=numIntegrantes]').value;
+    listaIntegrantes = integrantes($numeroIntegrantes);
+    let completadoCorrectamente = verificaQueNoHayaCamposVaciosIntegrantes();
+    if(completadoCorrectamente){
+
+        const $numeroDeTareas = document.querySelector('[name=numTareas]').value;
+        
+        clickEnBotonConfirmaIntegrantes = true;
+        document.querySelector('#enviarIntegrantes').style.display='none';
+        if(clickEnBotonConfirmaTareas && clickEnBotonConfirmaIntegrantes){
+            dibujaTareasEintegrantes($numeroDeTareas,$numeroIntegrantes);
+            document.querySelector('#botonContinuar').style.display='block';
+            $botonConfirmaIntegrantes.style.display = 'none';
+            ocultaCampos();
+            apareceInfoIngresada();
+        
+        }
+
+    }
+    
+}
+
 function integrantes(numeroDeIntegrantes){
 
     let listaIntegrantes = [];
@@ -171,34 +211,21 @@ function integrantes(numeroDeIntegrantes){
 
 }
 
-
-
-
-
-
-
-
-
-let = clickEnBotonConfirmaIntegrantes = false;
-const $botonConfirmaIntegrantes = document.querySelector('#confirmaIntegrantes');
-$botonConfirmaIntegrantes.onclick = ()=>{
-    const $numeroDeTareas = document.querySelector('[name=numTareas]').value;
-    const $numeroIntegrantes = document.querySelector('[name=numIntegrantes]').value;
-    clickEnBotonConfirmaIntegrantes = true;
-    document.querySelector('#enviarIntegrantes').style.display='none';
-    if(clickEnBotonConfirmaTareas && clickEnBotonConfirmaIntegrantes){
-        dibujaTareasEintegrantes($numeroDeTareas,$numeroIntegrantes);
-        document.querySelector('#botonContinuar').style.display='block';
+let verificaQueNoHayaCamposVaciosIntegrantes = () =>{
+    
+    for(let i = 0; i < listaIntegrantes.length; i++){
+        if(listaIntegrantes[i]===""){
+            document.querySelector(`#inputIntegrante${i}`).style.backgroundColor="#ff9191";
+            document.querySelector(`#inputIntegrante${i}`).placeholder="No puede estar vacio";
+            
+            
+            return false;
+        }
+            
         
     }
+    return true;
 }
-
-
-
-
-
-
- 
 
 function dibujaTareasEintegrantes(cantTareas,cantIntegrantes){
     
@@ -214,9 +241,16 @@ function dibujaTareasEintegrantes(cantTareas,cantIntegrantes){
     $sectionMuestraInfo.appendChild($contenedorIntegrantes);
     const $contenedorListaTareas = document.createElement('ol');
     const $contenedorListaIntegrantes = document.createElement('ol');
+    const $tituloTareas = document.createElement('h2');
+    const $tituloIntegrantes = document.createElement('h2');
+    $tituloTareas.textContent='Tareas:';
+    $tituloTareas.id='tituloListaTareas';
+    $tituloIntegrantes.textContent='Integrantes:';
+    $tituloIntegrantes.id='tituloListaIntegrantes';
     
-    
+    $contenedorTareas.appendChild($tituloTareas);
     $contenedorTareas.appendChild($contenedorListaTareas);
+    $contenedorIntegrantes.appendChild($tituloIntegrantes);
     $contenedorIntegrantes.appendChild($contenedorListaIntegrantes);
     for(let i = 0; i<cantTareas; i++){
         const $elementosDeListaTareas = document.createElement('li');
@@ -241,20 +275,53 @@ function dibujaTareasEintegrantes(cantTareas,cantIntegrantes){
 
 
 
+function ocultaCampos(){
+    gsap.fromTo ( "#ingresoDeTareas" , { scale:1}, { duration : 0.5, scale:0});  
+    
+    setTimeout(function(){document.querySelector('#ingresoDeTareas').style.display = 'none'},1000);
+    
+
+}
+
+function apareceInfoIngresada(){
+    gsap.from("#infoIngresada", {delay:1.5, duration: 1, opacity: 0, scale: 0.5, ease: "back"});
+}
+ 
+
+
+
+
+
 
 const $botonContinuar = document.querySelector('#botonContinuar');
     $botonContinuar.onclick = ()=>{
-
-        let arrayIntegranteYtarea = asignaUnIntegranteAcadaTarea(listaTareas,listaIntegrantes);
-        let listaDeIntegrantesFinalizada=crearIntegrante(arrayIntegranteYtarea);
-        let arrayIntegranteYtareaParaInspector = asignaUnInspectorAcadaTarea(listaTareas,listaIntegrantes,listaDeIntegrantesFinalizada);
+        $botonContinuar.style.display = 'none';
+        arrayIntegranteYtarea = asignaUnIntegranteAcadaTarea(listaTareas,listaIntegrantes);
+        listaDeIntegrantesFinalizada=crearIntegrante(arrayIntegranteYtarea);
+        arrayIntegranteYtareaParaInspector = asignaUnInspectorAcadaTarea(listaTareas,listaIntegrantes,listaDeIntegrantesFinalizada);
         let listaInspectoresFinalizada = creaInspectores(arrayIntegranteYtareaParaInspector);
         console.log(listaDeIntegrantesFinalizada)
         console.log(listaInspectoresFinalizada);
+        ruletaSuspenso();
         dibujaResultados(listaDeIntegrantesFinalizada,listaInspectoresFinalizada);
+        creaListaResultadoNombres(listaIntegrantes);
+        creaListaResultadoTareas(listaTareas);
         //infoIntegranteEspecifico();
         //infoTareaEspecifica();
+        
     }
+
+
+
+
+function ruletaSuspenso(){
+    document.querySelector('#ruleta2').style.display = 'block';
+    TweenLite.to('#ruleta2', 3, {rotation:720 }).repeat(-1);
+    gsap.fromTo ( "#ruleta2" , { scale:1}, { delay:1, duration : 0.5, scale:0});
+    setTimeout(function(){document.querySelector('#ruleta2').style.display = 'none'},3000);
+    gsap.from("#resultadosGenerales", {delay:3, duration: 1, opacity: 0, scale: 0.5, ease: "elastic"});
+    setTimeout(function(){$botondescargar.style.display = 'block'},5000);
+}
 
 function asignaUnIntegranteAcadaTarea(listaTareas,listaIntegrantes){
     let arrayTareaEintegrante = [];
@@ -269,13 +336,33 @@ function asignaUnIntegranteAcadaTarea(listaTareas,listaIntegrantes){
 function asignaUnInspectorAcadaTarea(listaTareas,listaIntegrantes,listaDeIntegrantesFinalizada){
     let arrayTareaEintegrante = [];
     for(let i = 0; i < listaTareas.length; i++){
-        let indexIntegranteAleatorio = Math.floor(Math.random()*(listaIntegrantes.length));
-        let integranteAleatorio = listaIntegrantes[indexIntegranteAleatorio];
-        if(integranteAleatorio != listaDeIntegrantesFinalizada[i].nombre){
-            arrayTareaEintegrante[i]=[listaTareas[i],integranteAleatorio];
-        } else {
-            i--;
-        }
+        
+
+            for(const indice in listaDeIntegrantesFinalizada){
+
+                if(listaDeIntegrantesFinalizada[indice].tareas.includes(listaTareas[i])){
+                    let indexIntegranteAleatorio = Math.floor(Math.random()*(listaIntegrantes.length));
+                    let integranteAleatorio = listaIntegrantes[indexIntegranteAleatorio];
+        
+                    
+                    if(listaDeIntegrantesFinalizada[indice].nombre != integranteAleatorio){
+                        arrayTareaEintegrante[i]=[listaTareas[i],integranteAleatorio];
+                        break;
+                    }else{
+                        i--;
+                    }
+
+
+                }
+                /*if(integranteAleatorio != listaDeIntegrantesFinalizada[indice].nombre){   //listaDeIntegrantesFinalizada.forEach(element => {if(i<listaDeIntegrantesFinalizada.length){}})
+                    arrayTareaEintegrante[i]=[listaTareas[i],integranteAleatorio];
+                    break;
+                }*/
+            }
+            
+             
+      
+      
         
     }
     return arrayTareaEintegrante;
@@ -288,10 +375,30 @@ function asignaUnInspectorAcadaTarea(listaTareas,listaIntegrantes,listaDeIntegra
 
 
 function crearIntegrante(arrayIntegranteYtarea){
-    listaObjetoIntegrantes = [];
-    for(let i=0; i<arrayIntegranteYtarea.length; i++){
-        let integrante = new Integrantes(arrayIntegranteYtarea[i][1],arrayIntegranteYtarea[i][0]);
-        listaObjetoIntegrantes.push(integrante);
+    let listaObjetoIntegrantes = [];
+    let listaIntegrantes = [];
+    for(let indice in arrayIntegranteYtarea){
+        if(listaIntegrantes.includes(arrayIntegranteYtarea[indice][1])){
+            
+            
+            listaObjetoIntegrantes.forEach(
+                element => {
+                            if(element.nombre===arrayIntegranteYtarea[indice][1]){
+                                element.tareas[element.tareas.length]=arrayIntegranteYtarea[indice][0];
+                            }
+                }
+            );
+        } else{
+
+            let integrante = new Integrantes(arrayIntegranteYtarea[indice][1],[arrayIntegranteYtarea[indice][0]]);
+            listaObjetoIntegrantes.push(integrante);
+            listaIntegrantes.push(integrante.nombre);
+
+        }
+
+
+        
+        
     }
 
     return listaObjetoIntegrantes;
@@ -302,82 +409,236 @@ function crearIntegrante(arrayIntegranteYtarea){
 
 function creaInspectores(arrayIntegranteYtareaParaInspector){
     listaObjetoInspectores=[];
-    for(let i=0; i<arrayIntegranteYtareaParaInspector.length; i++){
-    let inspector = new Inspectores(arrayIntegranteYtareaParaInspector[i][1],arrayIntegranteYtareaParaInspector[i][0]);
-    listaObjetoInspectores.push(inspector);
+    let listaInspectores = [];
+    for(const indice in arrayIntegranteYtareaParaInspector){
+    
+        if(listaInspectores.includes(arrayIntegranteYtareaParaInspector[indice][1])){
+
+            listaObjetoInspectores.forEach(
+                element => {
+                            if(element.nombre===arrayIntegranteYtareaParaInspector[indice][1]){
+                                element.tareas[element.tareas.length]=arrayIntegranteYtareaParaInspector[indice][0];
+                            }
+                }
+            );
+
+        } else{
+            let inspector = new Inspectores(arrayIntegranteYtareaParaInspector[indice][1],[arrayIntegranteYtareaParaInspector[indice][0]]);
+            listaObjetoInspectores.push(inspector);
+            listaInspectores.push(inspector.nombre);
+        }
+    
+    
     }
 
     return listaObjetoInspectores;
 
 }
 
-function dibujaResultados(listaIntegrantesFinalizada,listaInspectoresFinalizada){
+function dibujaResultados(listaDeIntegrantesFinalizada,listaInspectoresFinalizada){
+    creaTablaResultadoGeneral(listaDeIntegrantesFinalizada,listaTareas);
+    creaTablaResultadoInspectores(listaInspectoresFinalizada,listaTareas);
     
+    
+}
+
+
+function creaTablaResultadoGeneral(listaIntegrantesFinalizada, listaTareas){
     const $sectionMuestraInfo = document.querySelector('#resultadosGenerales');
-    const $tituloIntegrantes = document.createElement('h2');
-    const $tituloInspectores = document.createElement('h2');
-    $tituloIntegrantes.textContent = 'Resultados:';
-    $tituloIntegrantes.id='tituloResultados';
-    $tituloIntegrantes.className='display-4';
-    $tituloInspectores.textContent = 'Inspectores:';
-    $tituloInspectores.id='tituloInspectores';
-    $tituloInspectores.className='display-4';
-    const $contenedorIntegrantesFinalizados = document.createElement('div');
-    const $contenedorInspectores = document.createElement('div');
-    $contenedorIntegrantesFinalizados.id='contenedorIntegrantesFinalizados';
-    $contenedorIntegrantesFinalizados.className='col-4';
-    $contenedorInspectores.id='contenedorInspectores';
-    $contenedorInspectores.className='col-4';
-    
+    const $contenedorIntegrantesFinalizados = document.querySelector('#info1');
     $sectionMuestraInfo.appendChild($contenedorIntegrantesFinalizados);
-    $sectionMuestraInfo.appendChild($contenedorInspectores);
-    const $contenedorListaIntegrantesFinalizados = document.createElement('ol');
-    const $contenedorListaInspectores = document.createElement('ol');
-    $contenedorListaIntegrantesFinalizados.appendChild($tituloIntegrantes);
-    $contenedorListaInspectores.appendChild($tituloInspectores);
+    //crea head de la tabla
+    const $contenedorCabecera = document.createElement('tr');
+    document.querySelector('#encabezadoTablaResultados').appendChild($contenedorCabecera);
+    const $tituloColumna1 = document.createElement('th');
+    const $tituloColumna2 = document.createElement('th');
+    const $tituloColumna3 = document.createElement('th');
+    $contenedorCabecera.appendChild($tituloColumna1);
+    $contenedorCabecera.appendChild($tituloColumna2);
+    $contenedorCabecera.appendChild($tituloColumna3);
+    $tituloColumna1.scope='col';
+    $tituloColumna2.scope='col';
+    $tituloColumna3.scope='col';
+    $tituloColumna3.id="tituloColumnaIntegrante";
+    $tituloColumna1.textContent=`#`;
+    $tituloColumna2.textContent="Tarea:";
+    $tituloColumna3.textContent="Responsable:";
+
+
+    for(let i = 0; i<listaTareas.length; i++){
+
+
+        //crea cuerpo de la tabla
+        const $contenedorResultado = document.createElement('tr');
+        document.querySelector('#cuerpoTablaResultados').appendChild($contenedorResultado);
+        
+
+
+        const $numeracionTabla = document.createElement('th');
+        $contenedorResultado.appendChild($numeracionTabla);
+
+        const $resultadoNombreIntegrante = document.createElement('td');
+        const $resultadoTareaIntegrante = document.createElement('td');
+
+        $contenedorResultado.appendChild($resultadoNombreIntegrante);
+        $contenedorResultado.appendChild($resultadoTareaIntegrante);
     
-    $contenedorIntegrantesFinalizados.appendChild($contenedorListaIntegrantesFinalizados);
-    $contenedorInspectores.appendChild($contenedorListaInspectores);
-    for(let i = 0; i<listaIntegrantesFinalizada.length; i++){
-        const $elementosDeListaIntegrantesFinalizados = document.createElement('li');
-        $contenedorListaIntegrantesFinalizados.appendChild($elementosDeListaIntegrantesFinalizados);
+        $numeracionTabla.textContent = i+1;
+        $numeracionTabla.scope='row';
+
+
+        $resultadoNombreIntegrante.id=`liIntegrante-${i}`;
+        $resultadoTareaIntegrante.id=`liIntegrante-${i}`;
+
+
+        $resultadoNombreIntegrante.textContent=`${listaTareas[i]}`;
+        for(const indice in listaIntegrantesFinalizada){
+            let listaTareasDeCadaIntegrante = listaIntegrantesFinalizada[indice].tareas;
+            
+            if (listaTareasDeCadaIntegrante.includes(listaTareas[i])){
+                $resultadoTareaIntegrante.textContent=`${listaIntegrantesFinalizada[indice].nombre}`;
+
+            }
+        }
         
-        $elementosDeListaIntegrantesFinalizados.id=`liIntegrante-${i}`;
-
-        $elementosDeListaIntegrantesFinalizados.textContent=`Tarea: ${listaIntegrantesFinalizada[i].tareas} Responsable ${listaIntegrantesFinalizada[i].nombre}`;
-    }
-
-    for(let i = 0; i<listaInspectoresFinalizada.length; i++){
-
-        const $elementosDeListaInspectores = document.createElement('li');
-        
-        $contenedorListaInspectores.appendChild($elementosDeListaInspectores);
-        
-        $elementosDeListaInspectores.id=`liInspector-${i}`;
-
-        $elementosDeListaInspectores.textContent=`Tarea: ${listaInspectoresFinalizada[i].tareas} Inspector: ${listaInspectoresFinalizada[i].nombre}`;
     }
 }
 
+
+
+function creaTablaResultadoInspectores(listaInspectoresFinalizada, listaTareas){
+    const $sectionMuestraInfo2 = document.querySelector('#resultadosGenerales');
+    const $contenedorInspectores = document.querySelector('#info2');
+    $sectionMuestraInfo2.appendChild($contenedorInspectores);
+    //crea head de la tabla
+    const $contenedorCabecera2 = document.createElement('tr');
+    document.querySelector('#encabezadoTablaInspectores').appendChild($contenedorCabecera2);
+    const $tituloColumna1 = document.createElement('th');
+    const $tituloColumna2 = document.createElement('th');
+    const $tituloColumna3 = document.createElement('th');
+    $contenedorCabecera2.appendChild($tituloColumna1);
+    $contenedorCabecera2.appendChild($tituloColumna2);
+    $contenedorCabecera2.appendChild($tituloColumna3);
+    $tituloColumna1.scope='col';
+    $tituloColumna2.scope='col';
+    $tituloColumna3.scope='col';
+    $tituloColumna3.id='tituloColumnaInspector';
+    $tituloColumna1.textContent=`#`;
+    $tituloColumna2.textContent="Tarea:";
+    $tituloColumna3.textContent="Inspectores:";
+
+
+    for(let i = 0; i<listaTareas.length; i++){
+
+
+        //crea cuerpo de la tabla
+        const $contenedorResultado2 = document.createElement('tr');
+        document.querySelector('#cuerpoTablaInspectores').appendChild($contenedorResultado2);
+        
+
+
+        const $numeracionTabla2 = document.createElement('th');
+        $contenedorResultado2.appendChild($numeracionTabla2);
+
+        const $resultadoNombreInspector = document.createElement('td');
+        const $resultadoTareaInspector = document.createElement('td');
+
+        $contenedorResultado2.appendChild($resultadoNombreInspector);
+        $contenedorResultado2.appendChild($resultadoTareaInspector);
+    
+        $numeracionTabla2.textContent = i+1;
+        $numeracionTabla2.scope='row';
+
+
+        $resultadoNombreInspector.id=`liIntegrante-${i}`;
+        $resultadoTareaInspector.id=`liIntegrante-${i}`;
+
+
+        $resultadoNombreInspector.textContent=`${listaTareas[i]}`;
+        for(const indice in listaInspectoresFinalizada){
+            let listaTareasDeCadaInspector = listaInspectoresFinalizada[indice].tareas;
+            if(listaTareasDeCadaInspector.includes(listaTareas[i]))
+            $resultadoTareaInspector.textContent=`${listaInspectoresFinalizada[indice].nombre}`;
+        }
+        
+    }
+
+    
+}
+
+
+function creaListaResultadoNombres(listaIntegrantes){
+
+
+    let contador = 0;
+
+    listaIntegrantes.forEach(element => {
+        contador += 1;
+        const $optionIntegrantes = document.createElement('option');
+        $optionIntegrantes.value=`${contador}`;
+        $optionIntegrantes.textContent=`${element}`;
+        document.querySelector('#listaOpcionesIntegrantes').appendChild($optionIntegrantes);
+        
+    });
+    
+}
+
+function creaListaResultadoTareas(listaTareas){
+
+
+    let contador = 0;
+
+    listaTareas.forEach(element => {
+        contador += 1;
+        const $optionTarea = document.createElement('option');
+        $optionTarea.value=`${contador}`;
+        $optionTarea.textContent=`${element}`;
+        document.querySelector('#listaOpcionesTareas').appendChild($optionTarea);
+        
+    });
+    
+}
+
+function infoIntegranteEspecifico(listaIntegrantes,listaIntegrantesFinalizada){
+    const listaTareasPorIntegrante = [];
+    for(const indice in listaIntegrantesFinalizada){
+
+    
+    if(listaIntegrantes[indice]===listaDeIntegrantesFinalizada.forEach(element => {element[1][indice]})){
+
+        listaTareasPorIntegrante.push(listaIntegrantes[indice]);
+        
+    }
+
+    }
+}
+
+
+
+
+
+
+
 const $botondescargar = document.querySelector('#descargarPdf');
 $botondescargar.onclick = ()=>{
-    document.querySelector('#contenedorIntegrantesFinalizados').style.width="100%";
-    document.querySelector('#contenedorInspectores').style.width="100%";
-    document.querySelector('#contenedorIntegrantesFinalizados').style.height="545px";
-    document.querySelector('#contenedorInspectores').style.height="545px";
-    document.querySelector('#contenedorInspectores').style.backgroundColor='#e5da76';
-    document.querySelector('#contenedorIntegrantesFinalizados').style.backgroundColor='#12a7c7';
+    document.querySelector('#info1').style.width="100%";
+    document.querySelector('#info2').style.width="100%";
+    //1100
+    document.querySelector('#info1').style.height="540px";
+    document.querySelector('#info2').style.height="540px";
+    //document.querySelector('#info2').style.backgroundColor='#e5da76';
+    //document.querySelector('#info1').style.backgroundColor='#12a7c7';
     let element = document.querySelector('#resultadosGenerales');
     
     html2pdf()
     .from(element)
     .save();
-    setTimeout(function(){document.querySelector('#contenedorIntegrantesFinalizados').style.width=""},0001);
-    setTimeout(function(){document.querySelector('#contenedorInspectores').style.width=""},0001);
-    setTimeout(function(){document.querySelector('#contenedorIntegrantesFinalizados').style.height="400px"},0001);
-    setTimeout(function(){document.querySelector('#contenedorInspectores').style.height="400px"},0001);
-    setTimeout(function(){document.querySelector('#contenedorInspectores').style.backgroundColor='#c6ba5d'},0001);
-    setTimeout(function(){document.querySelector('#contenedorIntegrantesFinalizados').style.backgroundColor='#e5da76'},0001);
+    setTimeout(function(){document.querySelector('#info1').style.width=""},0001);
+    setTimeout(function(){document.querySelector('#info2').style.width=""},0001);
+    setTimeout(function(){document.querySelector('#info1').style.height=""},0001);
+    setTimeout(function(){document.querySelector('#info2').style.height=""},0001);
+    //setTimeout(function(){document.querySelector('#info2').style.backgroundColor='#c6ba5d'},0001);
+    //setTimeout(function(){document.querySelector('#info1').style.backgroundColor='#e5da76'},0001);
 }
     
 

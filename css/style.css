@@ -16,11 +16,12 @@
     display: none;
 }
 
-/*#ocultaIntegrantes{
+
+#ocultaBtnEnviarTareas{
     display: none;
 }
-*/
-#ocultaBtnEnviarTareas{
+
+#enviarIntegrantes{
     display: none;
 }
 
@@ -107,13 +108,13 @@ header{
 #contenedorTareas{
     
     background-color: rgb(229, 218, 118);
-    height: 400px;
+    padding: 5px;
 }
 
 #contenedorIntegrantes{
     
     background-color: rgb(198, 186, 93);
-    height: 400px;
+    padding: 5px;
 }
 
 #infoIngresada{
@@ -126,18 +127,48 @@ header{
     
 }
 
-#contenedorIntegrantesFinalizados{
-    background-color: rgb(229, 218, 118);
-    height: 400px;
+#info1{
+    background-color: rgb(53, 221, 239);
+    /*height: 400px;*/
     
 }
 
-#contenedorInspectores{
-    background-color: rgb(198, 186, 93);
-    height: 400px;
+#info2{
+    background-color: rgb(229, 218, 118);
+    /*height: 400px;*/
 }
 
 #resultadosGenerales{
     padding: 10px;
 }
 
+#tituloColumnaInspector{
+    width: 50%;
+}
+
+#tituloColumnaIntegrante{
+    width: 50%;
+}
+
+#tituloListaTareas{
+    margin-left: 11px;
+}
+
+#tituloListaIntegrantes{
+    margin-left: 11px;
+}
+
+#check_icon{
+    width: 40px;
+    height: 40px;
+    display: none;
+}
+
+#ruleta2{
+    display: none;
+    width: 300px;
+}
+
+#descargarPdf{
+    display: none;
+}
