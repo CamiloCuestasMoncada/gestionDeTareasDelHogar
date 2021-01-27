@@ -125,3 +125,19 @@ header{
     display: none;
     
 }
+
+#contenedorIntegrantesFinalizados{
+    background-color: rgb(229, 218, 118);
+    height: 400px;
+    
+}
+
+#contenedorInspectores{
+    background-color: rgb(198, 186, 93);
+    height: 400px;
+}
+
+#resultadosGenerales{
+    padding: 10px;
+}
+
