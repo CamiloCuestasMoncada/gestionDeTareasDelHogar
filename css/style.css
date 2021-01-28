@@ -172,3 +172,58 @@ header{
 #descargarPdf{
     display: none;
 }
+#consultas{
+    display: none;
+}
+
+#muestraTareasFiltroIntegrante {
+    color: cornsilk;
+    padding: 20px;
+}
+
+#muestraTareasFiltroInspector {
+    color: cornsilk;
+    padding: 20px;
+}
+
+#tituloNombre{
+    color:#35ddef;
+    text-align: center;
+    padding: 14px;
+}
+
+#tareasArealizar{
+    color:cornsilk;
+    text-align: center;
+    
+}
+
+#tareasAinspeccionar{
+    color:cornsilk;
+    text-align: center;
+    
+}
+
+#stick-rest{
+    width: 142px;
+    position: relative;
+    bottom: 10px;
+}
+
+#resultadoSinTareas{
+    display: none;
+}
+
+#stick-rest___container{
+    overflow: hidden;
+    height: 258px;
+    width: 179px;
+    border: solid #e5da76 10px;
+}
+#mensajeSinTareas{
+    color: aqua;
+    text-align: center;
+}
+
+
+

@@ -49,9 +49,26 @@ document.addEventListener('DOMContentLoaded', () => {
 const $botonGenerarCantidadTareas = document.querySelector('#botonEnviarTareas');
 $botonGenerarCantidadTareas.onclick = ()=>{
     const $numeroDeTareas = document.querySelector('[name=numTareas]').value;
+    resetearCampos('.filaInputTareas');
+    
     
     creaCamposNombresTareas($numeroDeTareas);
     document.querySelector('#confirmaTareas').style.display="block";
+}
+
+function resetearCampos(idElemntoAeliminar){
+        const numIndices = document.querySelectorAll(idElemntoAeliminar);
+    if(numIndices.length>0){
+        
+        for(let i = 0; i<numIndices.length; i++){
+            numIndices[i].remove();
+        }
+      
+        
+    }
+       
+      
+    
 }
 
 
@@ -71,7 +88,7 @@ const creaCamposNombresTareas = numTareas =>{
         $inputCampoTareas.name=`input${i}`;
         $inputCampoTareas.type="text";
         $inputCampoTareas.id=`inputId${i}`;
-        $divCampoTareas.id=`filaInput${i}`;
+        $divCampoTareas.className=`filaInputTareas`;
 
     }
     
@@ -85,6 +102,7 @@ let listaIntegrantes = [];
 let arrayIntegranteYtarea = [];
 let arrayIntegranteYtareaParaInspector = [];
 let listaDeIntegrantesFinalizada = [];
+let listaInspectoresFinalizada = [];
 
 let = clickEnBotonConfirmaTareas = false;
 const $botonConfirmaTareas = document.querySelector('#confirmaTareas');
@@ -142,6 +160,7 @@ function tareas(numeroDeTareas){
 
 const $botonGenerarCantidadIntegrantes = document.querySelector('#enviarIntegrantes');
 $botonGenerarCantidadIntegrantes.onclick = ()=>{
+    resetearCampos('.filaInputIntegrantes');
     const $numeroIntegrantes = document.querySelector('[name=numIntegrantes]').value;
     creaCamposNombresIntegrantes($numeroIntegrantes);
     document.querySelector('#confirmaIntegrantes').style.display="block";
@@ -166,6 +185,7 @@ const creaCamposNombresIntegrantes = numIntegrantes =>{
         $inputCampoIntegrantes.name=`inputIntegrante${i}`;
         $inputCampoIntegrantes.type="text";
         $inputCampoIntegrantes.id=`inputIntegrante${i}`;
+        $divCampoIntegrantes.className = 'filaInputIntegrantes';
 
     }
 
@@ -297,15 +317,15 @@ const $botonContinuar = document.querySelector('#botonContinuar');
     $botonContinuar.onclick = ()=>{
         $botonContinuar.style.display = 'none';
         arrayIntegranteYtarea = asignaUnIntegranteAcadaTarea(listaTareas,listaIntegrantes);
-        listaDeIntegrantesFinalizada=crearIntegrante(arrayIntegranteYtarea);
+        listaDeIntegrantesFinalizada=crearIntegrante(arrayIntegranteYtarea,listaIntegrantes);
         arrayIntegranteYtareaParaInspector = asignaUnInspectorAcadaTarea(listaTareas,listaIntegrantes,listaDeIntegrantesFinalizada);
-        let listaInspectoresFinalizada = creaInspectores(arrayIntegranteYtareaParaInspector);
+        listaInspectoresFinalizada = creaInspectores(arrayIntegranteYtareaParaInspector);
         console.log(listaDeIntegrantesFinalizada)
         console.log(listaInspectoresFinalizada);
         ruletaSuspenso();
         dibujaResultados(listaDeIntegrantesFinalizada,listaInspectoresFinalizada);
         creaListaResultadoNombres(listaIntegrantes);
-        creaListaResultadoTareas(listaTareas);
+        
         //infoIntegranteEspecifico();
         //infoTareaEspecifica();
         
@@ -320,7 +340,8 @@ function ruletaSuspenso(){
     gsap.fromTo ( "#ruleta2" , { scale:1}, { delay:1, duration : 0.5, scale:0});
     setTimeout(function(){document.querySelector('#ruleta2').style.display = 'none'},3000);
     gsap.from("#resultadosGenerales", {delay:3, duration: 1, opacity: 0, scale: 0.5, ease: "elastic"});
-    setTimeout(function(){$botondescargar.style.display = 'block'},5000);
+    setTimeout(function(){$botondescargar.style.display = 'block'},4000);
+    setTimeout(function(){document.querySelector('#consultas').style.display = 'block'},4000);
 }
 
 function asignaUnIntegranteAcadaTarea(listaTareas,listaIntegrantes){
@@ -374,7 +395,7 @@ function asignaUnInspectorAcadaTarea(listaTareas,listaIntegrantes,listaDeIntegra
     
 
 
-function crearIntegrante(arrayIntegranteYtarea){
+function crearIntegrante(arrayIntegranteYtarea,todosLosIntegrantes){
     let listaObjetoIntegrantes = [];
     let listaIntegrantes = [];
     for(let indice in arrayIntegranteYtarea){
@@ -396,9 +417,25 @@ function crearIntegrante(arrayIntegranteYtarea){
 
         }
 
+        
+            
 
         
         
+    }
+    
+   
+    for(const persona of todosLosIntegrantes){
+        let contador = 0;
+        listaObjetoIntegrantes.forEach(objetoIntegrante => {
+            if(objetoIntegrante.nombre!=persona){
+                contador++;
+                if(contador===listaObjetoIntegrantes.length){
+                    let integrante = new Integrantes(persona,[]);
+                    listaObjetoIntegrantes.push(integrante);
+                }
+            }
+        })
     }
 
     return listaObjetoIntegrantes;
@@ -575,7 +612,7 @@ function creaListaResultadoNombres(listaIntegrantes){
     listaIntegrantes.forEach(element => {
         contador += 1;
         const $optionIntegrantes = document.createElement('option');
-        $optionIntegrantes.value=`${contador}`;
+        $optionIntegrantes.value=`${element}`;
         $optionIntegrantes.textContent=`${element}`;
         document.querySelector('#listaOpcionesIntegrantes').appendChild($optionIntegrantes);
         
@@ -583,21 +620,7 @@ function creaListaResultadoNombres(listaIntegrantes){
     
 }
 
-function creaListaResultadoTareas(listaTareas){
 
-
-    let contador = 0;
-
-    listaTareas.forEach(element => {
-        contador += 1;
-        const $optionTarea = document.createElement('option');
-        $optionTarea.value=`${contador}`;
-        $optionTarea.textContent=`${element}`;
-        document.querySelector('#listaOpcionesTareas').appendChild($optionTarea);
-        
-    });
-    
-}
 
 function infoIntegranteEspecifico(listaIntegrantes,listaIntegrantesFinalizada){
     const listaTareasPorIntegrante = [];
@@ -613,7 +636,118 @@ function infoIntegranteEspecifico(listaIntegrantes,listaIntegrantesFinalizada){
     }
 }
 
+const $botonBuscarPorNombre = document.querySelector('#filtraPorNombre');
 
+$botonBuscarPorNombre.onclick = function(){
+    resetearCampos('.filtroLiTarea');
+    //resetearCampos('#tareasArealizar');
+    //resetearCampos('#tareasAinspeccionar');
+    document.querySelector('#resultadoSinTareas').style.display = 'none';
+    
+    resultadoBusquedaFiltro();
+}
+
+
+function resultadoBusquedaFiltro(){
+    const $tagSelectIntegrantes = document.querySelector('#listaOpcionesIntegrantes').value;
+    resultadoTareasArealizar($tagSelectIntegrantes,listaDeIntegrantesFinalizada);
+    resultadoTareasAinspeccionar($tagSelectIntegrantes,listaInspectoresFinalizada);
+    
+
+}
+
+function resultadoTareasArealizar(idSelect,listaDeIntegrantesFinalizada){
+    for(const indice of listaDeIntegrantesFinalizada){
+        
+        
+        if(idSelect === indice.nombre){
+
+            const $nombre=document.querySelector('#tituloNombre');
+            $nombre.textContent=idSelect;
+            
+            if(indice.tareas.length===0){
+                document.querySelector('#resultadoSinTareas').style.display = 'block';
+                animacionHamaca(2);
+                
+                
+                
+                
+            }else{
+
+
+           
+            //alert("Reconoce El select");
+                for(const element of indice.tareas){
+                    //const getTareasObjetoIntegrantes = element.tareas;
+                    const $listaTarea = document.createElement('li');
+                    $listaTarea.textContent = element;
+                    $listaTarea.className='filtroLiTarea';
+                    document.querySelector('#muestraTareasFiltroIntegrante').appendChild($listaTarea);
+                    
+                    
+                }
+            }
+        }
+    }
+}
+
+function animacionHamaca(tiempo){
+    
+    TweenLite.set("#stick-rest", {transformOrigin:"center top"});
+                let contador = 0;
+                let angulo = 50;
+                for(let i=0; i<5; i++){
+                    
+                    if(i===0){
+                        gsap.fromTo ( "#stick-rest" , { rotation:50}, { duration : tiempo, rotation:-50});
+                        gsap.fromTo ( "#stick-rest" , { rotation:-50}, { delay:contador+=tiempo, duration : tiempo, rotation:50});
+                    }
+                   
+                    angulo-=10;
+                    gsap.fromTo ( "#stick-rest" , { rotation:angulo}, { delay:contador+=tiempo, duration : tiempo, rotation:-angulo});
+                    
+                    gsap.fromTo ( "#stick-rest" , { rotation:-angulo}, { delay:contador+=tiempo, duration : tiempo, rotation:angulo});
+                    
+                }
+                
+}
+
+
+function resultadoTareasAinspeccionar(idSelect,listaInspectoresFinalizada){
+    for(const indice of listaInspectoresFinalizada){
+        if(idSelect === indice.nombre){
+           
+
+            //alert("Reconoce El select");
+            for(const element of indice.tareas){
+                //const getTareasObjetoIntegrantes = element.tareas;
+                const $listaTarea = document.createElement('li');
+                $listaTarea.textContent = element;
+                $listaTarea.className='filtroLiTarea';
+                document.querySelector('#muestraTareasFiltroInspector').appendChild($listaTarea);
+                
+            }
+
+        }
+    }
+}
+
+/*function resultadoBusquedaFiltro(idSelect,listaIntegrantes, listaDeIntegrantesFinalizada){
+    for(const indice of listaIntegrantes){
+        if(idSelect === indice){
+            for(const element of listaDeIntegrantesFinalizada.tareas){
+                const $contenedorInfoFiltradaPorNombre = document.createElement('li');
+                $contenedorInfoFiltradaPorNombre.textContent = listaDeIntegrantesFinalizada.tareas[element];
+                //$contenedorInfoFiltradaPorNombre.textContent = element.tareas.forEach(element.tareas=>);
+            }
+            
+
+            
+        }
+    }
+    
+
+}*/
 
 
 
