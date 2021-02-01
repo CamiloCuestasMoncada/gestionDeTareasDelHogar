@@ -1,7 +1,6 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -13,135 +12,123 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
     <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
-    
+
 </head>
+
 <body class="bg-info">
     <header class="container-fluid bg-image p-0">
-        <nav class="navbar navbar-expand-sm p-5 text-center bg-image justify-content-end" id="cabecera">
-             
-
-            <a href="#" class="col-4">
-            <img
-                
-                id="inicio"
-                src="./img/logo-inicio.svg"
-                alt="icono casa limpia"
-                height="150"
-                width="150"
-                 />
-
-            </a>    
-            
-            <a href="#" class="col-4 " id="contenedor__buttonTutorial">
-                <img
-                    
-                    id="buttonTutorial"
-                    src="./img/ico-question.svg"
-                    alt="icono de pregunta"
-                    height="90"
-                    width="90"
-                     />
-    
-                </a>    
+        <nav class="navbar  p-5 bg-image" id="cabecera">
 
 
-                
+            <a href="#" class="" id="icon-inicio">
+                <img id="inicio" src="./img/logo-inicio.svg" alt="icono casa limpia" height="150" width="150" />
+
+            </a>
+
+            <div class="" id="icon-question">
+                <img class="" id="buttonTutorial" src="./img/ico-question.svg" alt="icono de pregunta" width="70px" />
+            </div>
+
+
+
+
+
 
         </nav>
-        
+
         <div class="row text-center m-0">
             <h1 id="titulo">Gestiona las tareas de tu hogar</h1>
         </div>
-        
+
     </header>
-    <hr
-    class="hr-danger"
-    size="4"
-    
-    />
-    <section>
-        
-            <div class="row " id="sticks">
-                
-                <img
-                id="jumping"
-                class="col-4"
-                 src="./img/stickJump.svg" 
-                 alt="stick saltando"
-                 height="319"
-                 width="301"
-                 />
 
-               
-                
-
-                    <img
-                 
-                    class="col-4"
-                    id="ruleta"
-                    src="./img/ruleta.svg"
-                    alt="ruleta con elementos de limpieza"
-                    width="200"
-                    
-                    
-                    />
-               
-                
-                
-
-
-                    <img
-                 
-                    class="col-4"
-                    id="stickEscape"
-                    src="./img/stickAlert.svg"
-                    alt="stick escapando"
-                    width="301"
-                    height="319"
-                    
-                    />
-
-                
-                
-
-                
-                 
-
-            
-
-            </div>
+    <section id="infoTutorial">
+        <img src="./img/close.svg" alt="icono cerrar" class="close">
+        <div id="contenidoTutorial">
+            <span><b>Bienvenid@</b> </span>
+            <p>El objetivo es participar con tu familia de un proceso de asignación de tareas del hogar de forma
+                divertida. <br>
+                <b>!es muy simple!</b> solo deberás ingresar la cantidad de tareas que se realizan en tu hogar y la
+                cantidad de miembros de tu familia,
+                se realizará de forma aleatoria la asignación de tareas, ¡Si estas de suerte quizas no te toque ninguna
+                tarea.! <br>
+                También se asignará el rol de <b>Inspector</b> a cada una de las tareas, el cual estará encargado de
+                asegurarse que la persona que debe realizar una tarea cumpla su función. <br>
+                Puedes descargar los resultados en un archivo .pdf y así compartirlo con cada integrante para que nadie
+                se olvide sus tareas.
+                ¡Éxitos!.
+            </p>
+        </div>
     </section>
 
-    <section id="ingresoDeTareas" class="container">
+
+
+    <hr class="hr-danger" size="4" />
+    <section class="container overflow-hidden">
+
+        <div class="row " id="sticks">
+
+            <img id="jumping" class="col-3" src="./img/stickJump.svg" alt="stick saltando" height="319" width="301" />
+
+
+
+
+            <img class="col-6" id="ruleta" src="./img/ruleta.svg" alt="ruleta con elementos de limpieza" width="200" />
+
+
+
+
+
+            <img class="col-3" id="stickEscape" src="./img/stickAlert.svg" alt="stick escapando" width="301"
+                height="319" />
+
+
+
+
+
+
+
+
+
+        </div>
+    </section>
+
+
+
+    <div class="mx-auto" style="width: 200px;">
+        <span id="empecemos">¡Empecemos!</span>
+    </div>
+    <section id="ingresoDeDatos" class="container">
         <div class="row">
-            
-            <div class="col-md-6">
+
+            <div class="col-md-6 ps-auto" id="containerIngresaTareas">
                 <span><b>1: </b>ingresa la cantidad de tareas para realizar en la semana.</span>
-                <form id="formularioInicio">
-                    <label>Ingrese la cantidad de tareas:</label>
-                    <input name="numTareas" type="number">
+                <form id="formularioTareas">
+
+                    <input name="numTareas" type="number" max="100">
                     <button type="button" id="botonEnviarTareas" class="btn btn-outline-warning btn-lg">Enviar</button>
                     <div id="camposTareas"></div>
                     <button id="confirmaTareas" class="btn btn-outline-warning btn-lg" type="button">Confirmar</button>
-                    <img src="./img/checkIcon.svg" alt="check icon" id="check_icon"/>
-            
-            
+                    <img src="./img/checkIcon.svg" alt="check icon" id="check_icon" />
+
+
                 </form>
-                
+
             </div>
-            <section id="ocultaIntegrantes" class="col-md-6">
+            <div class="col-md-6" id="containerIngresaIntegrantes">
                 <span><b>2: </b>ingresa la cantidad de integrantes de tu familia.</span>
-                <form>
-                    <label>Ingrese la cantidad de integrantes:</label>
+                <form id="formularioIntegrantes">
+
                     <input type="number" name="numIntegrantes">
                     <button id="enviarIntegrantes" type="button" class="btn btn-outline-warning btn-lg">Enviar</button>
-                    <div id="camposIntegrantes"></div> 
-                    <button id="confirmaIntegrantes" class="btn btn-outline-warning btn-lg" type="button">Confirmar</button>
+                    <div id="camposIntegrantes"></div>
+                    <button id="confirmaIntegrantes" class="btn btn-outline-warning btn-lg"
+                        type="button">Confirmar</button>
                 </form>
-                
-            </section>
+
+            </div>
         </div>
-        
+
     </section>
 
     <section class="container">
@@ -152,29 +139,20 @@
     <div class="container">
         <div class="row justify-content-center" id="containerRuleta2">
 
-            <img
-                 
-                class="col-6"
-                id="ruleta2"
-                src="./img/ruleta.svg"
-                alt="ruleta con elementos de aseo"
-                width="400"
-            
-            
-            />
+            <img class="col-6" id="ruleta2" src="./img/ruleta.svg" alt="ruleta con elementos de aseo" width="400" />
         </div>
 
-        </div>
-        
-    
-    <section class="container">
-        <div class="row justify-content-center" id="resultadosGenerales">
+    </div>
+
+
+    <section class="container" id="tablaResultados">
+        <div class="table-responsive justify-content-center" id="resultadosGenerales">
             <table id="info1" class="col-4 table table-striped table-hover border-dark">
-                
+
                 <thead id="encabezadoTablaResultados"></thead>
                 <tbody id="cuerpoTablaResultados"></tbody>
             </table>
-            
+
             <table id="info2" class="col-4 table table-striped table-hover border-dark">
                 <thead id="encabezadoTablaInspectores"></thead>
                 <tbody id="cuerpoTablaInspectores"></tbody>
@@ -186,25 +164,26 @@
             <button id="descargarPdf" class="col-md-2 btn btn-outline-warning btn-lg ">Descargar .pdf</button>
         </div>
     </div>
-    
-    
-    
-    
-    
+
+
+
+
+
     <div id="contenedorBotonContinuar" class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-outline-warning btn-lg justify-content-center" type="button" id="botonContinuar">Sortear</button>
+        <button class="btn btn-outline-warning btn-lg justify-content-center" type="button"
+            id="botonContinuar">Sortear</button>
     </div>
-    
+
     <section class="container" id="consultas">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h3>Filtra resultados por nombre</h3>
-                
+
                 <select class="form-select" aria-label="Default select example" id="listaOpcionesIntegrantes">
                     <option selected>Selecciona un nombre:</option>
                 </select>
                 <button id="filtraPorNombre" class="col-md-12 btn btn-outline-warning btn-lg ">Buscar</button>
-                <div class="container bg-dark">
+                <div class="container bg-dark" id="visualizaInfoConsultas">
                     <div class="row justify-content-center">
                         <h4 class="" id="tituloNombre"></h4>
                         <div class="col-md-6 justify-content-center" id="contenedorListaConsultas">
@@ -212,110 +191,83 @@
                             <div class="container" id="resultadoSinTareas">
                                 <div class="row justify-content-center">
                                     <div id="stick-rest___container">
-                                        <img src="./img/stick-rest.svg" alt="stick descansando en una hamaca" id="stick-rest">
+                                        <img src="./img/stick-rest.svg" alt="stick descansando en una hamaca"
+                                            id="stick-rest">
                                     </div>
-                                    
-                                    <h4 id="mensajeSinTareas">¡Que Suerte! No debes realizar ninguna tarea.</h4>
+
+                                    <h5 id="mensajeSinTareas">¡Que Suerte! No debes realizar ninguna tarea.</h5>
+
                                 </div>
-                            
+
                             </div>
-                            
+
                             <ol class="" id="muestraTareasFiltroIntegrante">
-                                
+
                             </ol>
                         </div>
                         <div class="col-md-6 justify-content-center" id="contenedorListaConsultas2">
                             <h4 id="tareasAinspeccionar">Tareas a inspeccionar: </h4>
+                            <h5 id="mensajeSinTareasAinspeccionar">No debes inspeccionar ninguna tarea.</h5>
                             <ol class="" id="muestraTareasFiltroInspector">
-                                
+
                             </ol>
                         </div>
                     </div>
-                    
+
                 </div>
-                
+
             </div>
-            
+
         </div>
 
     </section>
-    
 
-    
+
+
     <footer id="footer">
-        <span class="row justify-content-center" id="autor">Developed and designed by Camilo Cuestas Moncada. ©2021. All rights reserved.</span>
+        <span class="row justify-content-center" id="autor">Developed and designed by Camilo Cuestas Moncada. ©2021. All
+            rights reserved.</span>
         <div class="container  p-2">
-            
-            <div class="row justify-content-md-center" id="socialMedia">
-                
-                <div class="col p-3 text-center">
+
+            <div class="row justify-content-center" id="socialMedia">
+
+                <div class="col-4 p-3 text-center">
                     <a href="https://github.com/CamiloCuestasMoncada" target="_blank">
-                        <img
-                            
-                            id="inicio"
-                            src="./img/git-hub.svg"
-                            alt="logo de git-hub"
-                            height="96"
-                            width="106" />
+                        <img id="icon-footer" src="./img/git-hub.svg" alt="logo de git-hub" height="96" width="106" />
                     </a>
                 </div>
-                
-                <div class="col p-3 text-center" >
-                
+
+                <div class="col-4 p-3 text-center">
+
                     <a href="#">
-                        
-                        <img
-                            
-                            id="inicio"
-                            src="./img/myWebSite.svg"
-                            alt="icono de sitio web"
-                            height="90"
+
+                        <img id="icon-footer" src="./img/myWebSite.svg" alt="icono de sitio web" height="90"
                             width="100" />
                     </a>
-    
+
                 </div>
-                <div class="col p-3 text-center">
+                <div class="col-4 p-3 text-center">
                     <a href="https://www.linkedin.com/in/jos%C3%A9-camilo-cuestas-moncada-06705a1b6/" target="_blank">
-                        <img
-                            
-                            id="inicio"
-                            src="./img/linkedin.svg"
-                            alt="logo de linkedin"
-                            height="90"
-                            width="100" />
-                    </a>                
+                        <img id="icon-footer" src="./img/linkedin.svg" alt="logo de linkedin" height="90" width="100" />
+                    </a>
                 </div>
-            
-            
-            
-            
-            
-            
-            
-            
+
+
             </div>
 
 
 
         </div>
-        
-        
-        
-    </footer>
-    
 
-      
-     
-        
-        
-        
-        
-        
-        
-    
+
+
+    </footer>
+
+
+
+    <script src="./js/gsap.js"></script>
+    <script src="js/index.js"></script>
 </body>
-<script src="./js/gsap.js"></script>
-<script src="js/dom.js"></script>
-<script src="js/index.js"></script>
+
 </html>
 

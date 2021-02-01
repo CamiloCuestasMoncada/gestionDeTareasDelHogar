@@ -1,7 +1,3 @@
-
-
-
-
 TweenLite.to('#ruleta', 140, {rotation:720 }).repeat(-1);
 
 let tween = gsap.from('#jumping',{
@@ -16,8 +12,9 @@ let tween = gsap.from('#jumping',{
 
 let escape = gsap.from('#stickEscape',{
     duration:3,
-    x:-70,
+    x:-40,
     
     
-    delay:4
+    delay:2
 }).repeat(-1);
+

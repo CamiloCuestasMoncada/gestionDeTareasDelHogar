@@ -1,231 +1,398 @@
-::-webkit-input-placeholder { color: white; } 
+::-webkit-input-placeholder {
+    color: white;
+}
 
-:-moz-placeholder { /* Firefox 18- */ color: white; } 
+:-moz-placeholder {
+    /* Firefox 18- */
+    color: white;
+}
 
-::-moz-placeholder { /* Firefox 19+ */ color: white; } 
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: white;
+}
 
-:-ms-input-placeholder { color: white; }
+:-ms-input-placeholder {
+    color: white;
+}
 
 
 
-#ocultaInfoTarea{
+#ocultaInfoTarea {
     display: none;
 }
 
-#ocultaResultadoInfo{
+#ocultaResultadoInfo {
     display: none;
 }
 
 
-#ocultaBtnEnviarTareas{
+#ocultaBtnEnviarTareas {
     display: none;
 }
 
-#enviarIntegrantes{
+#enviarIntegrantes {
     display: none;
 }
 
-#titulo{
+#titulo {
     font-family: 'Noto Sans KR', sans-serif;
-    font-size:400%;
-    margin:0;    
+    font-size  : 400%;
+    margin     : 0;
 }
+
 /*#socialMedia{
     background-color:rgb(229, 218, 118);
 }*/
 
 
-#autor{
-    margin: 0;
-    color: rgb(250, 250, 250);
-    background-color:rgb(25, 25, 25);
-    
+#autor {
+    margin          : 0;
+    color           : rgb(250, 250, 250);
+    background-color: rgb(25, 25, 25);
+    text-align      : center;
+
 }
 
-#footer{
-    background-color:rgb(229, 218, 118);
-    
+#footer {
+    background-color: rgb(229, 218, 118);
+
 }
 
-#sticks{
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 4rem;
+#sticks {
+    margin-left  : 0;
+    margin-right : 0;
+    margin-top   : 4rem;
     margin-bottom: 4rem;
 }
 
-hr{
-    
-    
-    max-width: 100%;
-    background-image: linear-gradient(to right,transparent,#000000,transparent);
-    border: 0;
-    
+hr {
+
+
+    max-width       : 100%;
+    background-image: linear-gradient(to right, transparent, #000000, transparent);
+    border          : 0;
+
 }
+
 /*.hr-danger{
     background-image: linear-gradient(to right,transparent,#ac0c0c,transparent);
 }*/
 
-#cabecera{
-    background-image:url("../img/bg-header.svg") ;
-    margin: 0;
-    
+#cabecera {
+    background-image: url("../img/bg-header.svg");
+    margin          : 0;
+
 }
-header{
+
+header {
     margin: 0;
 }
 
 @media (max-width: 576px) {
-   
-    #titulo{
+
+    #titulo {
         font-family: 'Noto Sans KR', sans-serif;
-        font-size:2rem;
-        margin:0;    
+        font-size  : 2rem;
+        margin     : 0;
     }
 }
 
-#resultado{
+#resultado {
     font-family: 'Noto Sans KR', sans-serif;
 }
 
-#busquedas{
+#busquedas {
     font-family: 'Noto Sans KR', sans-serif;
-    
+
 }
 
-#areaTexto{
-    background-color: rgb(13,174,201);
+#areaTexto {
+    background-color: rgb(13, 174, 201);
 }
 
-#confirmaTareas{
-    display: none;
+#confirmaTareas {
+    display      : none;
+    margin-top   : 10px;
+    margin-bottom: 10px;
 }
 
-#confirmaIntegrantes{
-    display: none;
-}
-
-#contenedorTareas{
-    
-    background-color: rgb(229, 218, 118);
-    padding: 5px;
-}
-
-#contenedorIntegrantes{
-    
-    background-color: rgb(198, 186, 93);
-    padding: 5px;
-}
-
-#infoIngresada{
+#confirmaIntegrantes {
+    display   : none;
     margin-top: 20px;
+}
+
+#contenedorTareas {
+
+    background-color: rgb(229, 218, 118);
+    padding         : 5px;
+}
+
+#contenedorIntegrantes {
+
+    background-color: rgb(198, 186, 93);
+    padding         : 5px;
+}
+
+#infoIngresada {
+    margin-top   : 20px;
     margin-bottom: 30px;
 }
 
-#botonContinuar{
-    display: none;
-    
+#botonContinuar {
+    display      : none;
+    margin-bottom: 30px;
 }
 
-#info1{
+#info1 {
     background-color: rgb(53, 221, 239);
-    /*height: 400px;*/
-    
+    /*height        : 400px;*/
+
 }
 
-#info2{
+#info2 {
     background-color: rgb(229, 218, 118);
-    /*height: 400px;*/
+    /*height        : 400px;*/
 }
 
-#resultadosGenerales{
+#resultadosGenerales {
+    padding: 10px;
     padding: 10px;
 }
 
-#tituloColumnaInspector{
+#tituloColumnaInspector {
     width: 50%;
 }
 
-#tituloColumnaIntegrante{
+#tituloColumnaIntegrante {
     width: 50%;
 }
 
-#tituloListaTareas{
+#tituloListaTareas {
     margin-left: 11px;
 }
 
-#tituloListaIntegrantes{
+#tituloListaIntegrantes {
     margin-left: 11px;
 }
 
-#check_icon{
-    width: 40px;
-    height: 40px;
+#check_icon {
+    width        : 40px;
+    height       : 40px;
+    display      : none;
+    margin-top   : 20px;
+    margin-bottom: 20px;
+}
+
+
+#ruleta2 {
+    display: none;
+    width  : 300px;
+}
+
+#descargarPdf {
     display: none;
 }
 
-#ruleta2{
-    display: none;
-    width: 300px;
-}
-
-#descargarPdf{
-    display: none;
-}
-#consultas{
-    display: none;
+#consultas {
+    display   : none;
+    margin-top: 37px;
 }
 
 #muestraTareasFiltroIntegrante {
-    color: cornsilk;
+    color  : cornsilk;
     padding: 20px;
 }
 
 #muestraTareasFiltroInspector {
-    color: cornsilk;
+    color  : cornsilk;
     padding: 20px;
 }
 
-#tituloNombre{
-    color:#35ddef;
+#tituloNombre {
+    color     : #35ddef;
     text-align: center;
-    padding: 14px;
+    padding   : 14px;
 }
 
-#tareasArealizar{
-    color:cornsilk;
+#tareasArealizar {
+    color     : cornsilk;
     text-align: center;
-    
+
 }
 
-#tareasAinspeccionar{
-    color:cornsilk;
+#tareasAinspeccionar {
+    color     : cornsilk;
     text-align: center;
-    
+
 }
 
-#stick-rest{
-    width: 142px;
+#stick-rest {
+    width   : 142px;
     position: relative;
-    bottom: 10px;
+    bottom  : 10px;
 }
 
-#resultadoSinTareas{
+#resultadoSinTareas {
     display: none;
 }
 
-#stick-rest___container{
+#stick-rest___container {
     overflow: hidden;
-    height: 258px;
-    width: 179px;
-    border: solid #e5da76 10px;
+    height  : 258px;
+    width   : 179px;
+    border  : solid #e5da76 10px;
 }
-#mensajeSinTareas{
-    color: aqua;
+
+#mensajeSinTareas {
+    color     : aqua;
     text-align: center;
 }
-#contenedor__buttonTutorial{
+
+#mensajeSinTareasAinspeccionar {
+    color     : aqua;
+    text-align: center;
+
+}
+
+#buttonTutorial {
     position: relative;
+    cursor  : pointer;
+}
+
+#infoTutorial {
+    position       : fixed;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    width          : 100%;
+    height         : 100%;
+    top            : 0;
+    left           : 0;
+    background     : rgba(0, 0, 0, 0.534);
+    transform      : translate(100%);
+    transition     : transform .2s ease-in-out;
+    z-index        : 4;
+}
+
+#contenidoTutorial {
+    width           : 60%;
+    border-radius   : 10px;
+    transition      : transform .3s .2s;
+    color           : cornsilk;
+    background-color: #6e00ff9c;
+    padding         : 20px;
+}
+
+.close {
+    position: absolute;
+    top     : 15px;
+    right   : 15px;
+    width   : 40px;
+    cursor  : pointer;
+}
+
+#avisoCampoVacio {
+    color     : #ffffff;
+    background: #ef6c6c;
+    padding   : 5px;
+}
+
+#icon-inicio {
+    padding: 5px;
+
 }
 
 
+
+#cabecera {
+    display        : flex;
+    justify-content: center;
+}
+
+#icon-inicio {
+    margin-left: auto;
+
+}
+
+#icon-question {
+    margin-left: auto;
+}
+
+#tablaResultados {
+    display: none;
+}
+
+#visualizaInfoConsultas {
+    display: none;
+}
+
+
+
+@media (max-width:576px) {
+    #cabecera {
+
+        min-height: 240px;
+    }
+
+    #icon-inicio {
+
+        position: absolute;
+    }
+
+    #icon-question {
+        margin-left: auto;
+        bottom     : 74px;
+        position   : relative;
+        left       : 30px;
+    }
+
+    #buttonTutorial {
+
+        width: 40px;
+    }
+
+    #icon-footer {
+        width   : 70px;
+        overflow: hidden;
+    }
+
+    #sticks {
+        margin: 0;
+    }
+
+    #contenidoTutorial {
+        width: 88%;
+
+    }
+
+    #tituloListaIntegrantes,
+    #tituloListaTareas {
+
+        font-size: 20px;
+    }
+
+    li {
+        overflow-wrap: break-word;
+        width        : 95%;
+
+    }
+
+
+
+}
+
+#empecemos {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size  : 170%;
+    margin     : 0;
+}
+
+#ingresoDeDatos {
+    margin-top: 70px;
+}
+
+#containerIngresaTareas,
+#containerIngresaIntegrantes {
+    padding-left: 7%;
+}
